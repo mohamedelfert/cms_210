@@ -2,25 +2,25 @@
 
 
 class Register extends MysqliConnect {
-    protected $Fname;
-    protected $Lname;
+    protected $first_name;
+    protected $last_name;
     protected $email;
     protected $password;
     protected $con_password;
 
-    public function setInput($Fname,$Lname,$email,$password,$con_password){
-        $this->Fname        = $this->filter_string($this->esc($this->html_entity($this->html_special($Fname))));
-        $this->Lname        = $this->filter_string($this->esc($this->html_entity($this->html_special($Lname))));
-        $this->email        = $this->filter_email($this->esc($this->html_entity($email)));
-        $this->password     = $this->esc($this->html_entity($this->html_special($password)));
-        $this->con_password = $this->esc($this->html_entity($this->html_special($con_password)));
+    public function setInput($first_name,$last_name,$email,$password,$con_password){
+        $this->first_name   = $this->filter_string($this->esc($this->html_tags($this->html_special($first_name))));
+        $this->last_name    = $this->filter_string($this->esc($this->html_tags($this->html_special($last_name))));
+        $this->email        = $this->filter_email($this->esc($this->html_tags($email)));
+        $this->password     = $this->esc($this->html_tags($this->html_special($password)));
+        $this->con_password = $this->esc($this->html_tags($this->html_special($con_password)));
     }
 
     public function checkInput(){
-        if (empty($this->Fname)){
+        if (empty($this->first_name)){
             Messages::setMessage('danger','خطأ','الرجاء ادخال الاسم الاول');
             echo Messages::getMessage();
-        }elseif (empty($this->Lname)){
+        }elseif (empty($this->last_name)){
             Messages::setMessage('danger','خطأ','الرجاء ادخال الاسم الاخير');
             echo Messages::getMessage();
         }elseif (empty($this->email)){
@@ -43,7 +43,7 @@ class Register extends MysqliConnect {
 
     public function displayErrors(){
         if ($this->checkInput()){
-            if ($this->insertUser()){
+            if ($this->insertNewUser()){
                 Messages::setMessage('success','رائع','تم التسجيل بنجاح , جاري تحويلك للصفحه الرئيسيه');
                 echo Messages::getMessage();
                 echo '<meta http-equiv="refresh" content="3; \'index.php\'">';
@@ -55,7 +55,7 @@ class Register extends MysqliConnect {
     }
 
     private function checkEmail(){
-        $this->query('id', 'users', "WHERE `email` = '$this->email'");
+        $this->query('id', "users", "WHERE `email` = '$this->email'");
         $this->execute();
         if ($this->rowCount() == 0){
             return true;
@@ -63,17 +63,17 @@ class Register extends MysqliConnect {
         return false;
     }
 
-    private function insertUser(){
+    private function insertNewUser(){
         $password = md5(sha1($this->password));
-        $this->insert('users',"FName,LName,email,password",
-                      "'$this->Fname','$this->Lname','$this->email','$password'");
+        $this->insert('users',"first_name , last_name , email , password",
+                      "'$this->first_name','$this->last_name','$this->email','$password'");
         if ($this->execute()){
             $_SESSION['is_logged'] = true;
             $_SESSION['user']      = [
-                                        'FName'   => $this->Fname,
-                                        'LName'   => $this->Lname,
+                                        'fname'   => $this->first_name,
+                                        'lname'   => $this->last_name,
                                         'email'   => $this->email,
-                                        'isAdmin' => false
+                                        'isAdmin' => FALSE
             ];
             return true;
         }

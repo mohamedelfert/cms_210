@@ -8,7 +8,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-        <a class="navbar-brand" href="#"><span><img src="libs/image/logo.png" width="30" /> تيوباتي</span></a>
+        <div class="navbar-brand"><span><img src="libs/image/logo.png" width="30" /> <?php echo SITENAME; ?> </span></div>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -32,18 +32,23 @@
         <button type="submit" class="btn btn-default">بحث</button>
       </form>
       <ul class="nav navbar-nav navbar-left">
+          <?php if (isset($_SESSION['is_logged']) and $_SESSION['is_logged'] == true): ?>
+              <li style="margin-top: 14px; padding: 0px 15px;"><span>أهلا وسهلا بكـ يا <?php echo $_SESSION['user']['fname'] . ' ' . $_SESSION['user']['lname']; ?> </span></li>
+              <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-cog"></i> الاعدادات <span class="caret"></span></a>
+                  <ul class="dropdown-menu" style="right: -75px;">
+                      <li><a href="profile.php?id=<?php echo $_SESSION['user']['id']; ?>"><i class="glyphicon glyphicon-edit"></i> تعديل الملف الشخصي</a></li>
+                      <li role="separator" class="divider"></li>
+                      <?php if ($_SESSION['user']['isAdmin'] == true): ?>
+                      <li><a href="#"><i class="glyphicon glyphicon-dashboard"></i> لوحة التحكم</a></li>
+                      <?php endif; ?>
+                      <li><a href="index.php?logout=true"><i class="glyphicon glyphicon-log-out"></i> تسجيل الخروج</a></li>
+                  </ul>
+              </li>
+          <?php else: ?>
           <li><a href="register.php"><i class="glyphicon glyphicon-user"></i> التسجيل</a></li>
           <li><a href="login.php"><i class="glyphicon glyphicon-log-in"></i> تسجيل الدخول</a></li>
-          <li style="margin-top: 14px; padding: 0px 15px;"><span>أهلا وسهلا بكـ يا مالك </span></li>
-        <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-cog"></i> الاعدادات <span class="caret"></span></a>
-          <ul class="dropdown-menu" style="right: -75px;">
-              <li><a href="#"><i class="glyphicon glyphicon-edit"></i> تعديل الملف الشخصي</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#"><i class="glyphicon glyphicon-dashboard"></i> لوحة التحكم</a></li>
-            <li><a href="#"><i class="glyphicon glyphicon-log-out"></i> تسجيل الخروج</a></li>
-          </ul>
-        </li>
+          <?php endif; ?>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

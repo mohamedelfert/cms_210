@@ -16,7 +16,7 @@
                     <?php
                     if ($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['register'])){
                         $register = new Register();
-                        $register->setInput($_POST['Fname'],$_POST['Lname'],$_POST['email'],$_POST['password'],$_POST['con_password']);
+                        $register->setInput($_POST['first_name'],$_POST['last_name'],$_POST['email'],$_POST['password'],$_POST['con_password']);
                         $register->displayErrors();
                     }
                     ?>
@@ -28,7 +28,7 @@
                     <div style="background: #ffffff;padding: 15px;margin: 15px 0px;border: 1px solid #dfd8d8;">
                         <?php
                         if (isset($_SESSION['is_logged']) and $_SESSION['is_logged'] == true){
-                            Messages::setMessage('info','تنبيه','عفوا يا ' . $_SESSION['user']['FName'] . ' ' . $_SESSION['user']['LName'] . ' انت بالفعل مسجل لدينا');
+                            Messages::setMessage('info','تنبيه','عفوا يا ' . $_SESSION['user']['fname'] . ' ' . $_SESSION['user']['lname'] . ' انت بالفعل مسجل لدينا');
                             echo Messages::getMessage();
                         }else{
                             require_once 'inc/forms/register.php';

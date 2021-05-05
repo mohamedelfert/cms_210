@@ -4,12 +4,12 @@
 class Login extends MysqliConnect{
     private $email;
     private $password;
-    private $md5_pass;
+    private $pass;
 
     public function setInput($email,$password){
-        $this->email    = $this->filter_email($this->esc($this->html_entity($email)));
-        $this->password = $this->esc($this->html_entity($this->html_special($password)));
-        $this->md5_pass = md5(sha1($this->password));
+        $this->email    = $this->filter_email($this->esc($this->html_tags($email)));
+        $this->password = $this->esc($this->html_tags($this->html_special($password)));
+        $this->pass = md5(sha1($this->password));
     }
 
     private function checkInput(){
@@ -23,31 +23,31 @@ class Login extends MysqliConnect{
             Messages::setMessage('danger','خطأ','البيانات المدخله غير صحيحه 1');
             echo Messages::getMessage();
         }else{
-            return TRUE;
+            return true;
         }
-        return FALSE;
+        return false;
     }
 
     private function checkUser(){
-        $this->query('id', 'users', "WHERE 'email' = '$this->email' AND 'password' = '$this->md5_pass'");
+        $this->query('id', 'users', "WHERE `email` = '$this->email' AND `password` = '$this->pass'");
         $this->execute();
-        if ($this->rowCount() > 0){
+        if($this->rowCount() > 0){
             return TRUE;
         }
         return FALSE;
     }
 
-    private function makeUserLogin(){
-        if ($this->checkUser()){
-            $this->query('*', 'users', "WHERE 'email' = '$this->email' AND 'password' = '$this->md5_pass'");
+    private function makeUserLogged(){
+        if($this->checkUser()){
+            $this->query('*', 'users', "WHERE `email` = '$this->email' AND `password` = '$this->pass'");
             $this->execute();
             $user  = $this->fetch();
-            $admin = ($user['isAdmin'] == 1 ? TRUE : FALSE);
+            $admin = ($user['is_Admin'] == 1 ? TRUE : FALSE);
             $_SESSION['is_logged'] = true;
             $_SESSION['user']      = [
                                         'id'      => $user['id'],
-                                        'FName'   => $user['FName'],
-                                        'LName'   => $user['LName'],
+                                        'fname'   => $user['first_name'],
+                                        'lname'   => $user['last_name'],
                                         'email'   => $user['email'],
                                         'isAdmin' => $admin
             ];
@@ -58,7 +58,7 @@ class Login extends MysqliConnect{
 
     public function displayErrors(){
         if ($this->checkInput()){
-            if ($this->makeUserLogin()){
+            if ($this->makeUserLogged()){
                 Messages::setMessage('success','رائع','تم تسجيل الدخول بنجاح , جاري تحويلك للصفحه الرئيسيه');
                 echo Messages::getMessage();
                 echo '<meta http-equiv="refresh" content="3; \'index.php\'">';

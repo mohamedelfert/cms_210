@@ -66,8 +66,8 @@ abstract class MysqliConnect implements DatabaseConnect {
         return htmlspecialchars($string);
     }
 
-    public function html_entity($string){
-        return htmlentities($string);
+    public function html_tags($string){
+        return strip_tags($string);
     }
 
     public function filter_string($variable){

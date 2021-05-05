@@ -1,14 +1,14 @@
 <form action="<?php echo $_SERVER['PHP_SELF']?>" method="POST" class="form-horizontal">
     <div class="form-group">
-        <label for="Fname" class="col-sm-3 control-label">الاسم الاول</label>
+        <label for="first_name" class="col-sm-3 control-label">الاسم الاول</label>
         <div class="col-sm-8">
-            <input type="text" class="form-control" id="Fname" name="Fname" value="<?php echo (isset($_POST['Fname']) ? $_POST['Fname'] : null); ?>" placeholder="أدخل الاسم الاول">
+            <input type="text" class="form-control" id="first_name" name="first_name" value="<?php echo (isset($_POST['first_name']) ? $_POST['first_name'] : null); ?>" placeholder="أدخل الاسم الاول">
         </div>
     </div>
     <div class="form-group">
-        <label for="Lname" class="col-sm-3 control-label">الاسم الاخير</label>
+        <label for="last_name" class="col-sm-3 control-label">الاسم الاخير</label>
         <div class="col-sm-8">
-            <input type="text" class="form-control" id="Lname" name="Lname" value="<?php echo (isset($_POST['Lname']) ? $_POST['Lname'] : null); ?>" placeholder="أدخل الاسم الاخير">
+            <input type="text" class="form-control" id="last_name" name="last_name" value="<?php echo (isset($_POST['last_name']) ? $_POST['last_name'] : null); ?>" placeholder="أدخل الاسم الاخير">
         </div>
     </div>
     <div class="form-group">
