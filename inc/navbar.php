@@ -40,7 +40,7 @@
                       <li><a href="profile.php?id=<?php echo $_SESSION['user']['id']; ?>"><i class="glyphicon glyphicon-edit"></i> تعديل الملف الشخصي</a></li>
                       <li role="separator" class="divider"></li>
                       <?php if ($_SESSION['user']['isAdmin'] == true): ?>
-                      <li><a href="#"><i class="glyphicon glyphicon-dashboard"></i> لوحة التحكم</a></li>
+                      <li><a href="admin_cp/index.php"><i class="glyphicon glyphicon-dashboard"></i> لوحة التحكم</a></li>
                       <?php endif; ?>
                       <li><a href="index.php?logout=true"><i class="glyphicon glyphicon-log-out"></i> تسجيل الخروج</a></li>
                   </ul>
