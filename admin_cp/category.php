@@ -1,6 +1,4 @@
-<?php require_once 'inc/topHeader.php';
-$category = new Category();
-?>
+<?php require_once 'inc/topHeader.php';?>
     <title><?php echo SITENAME; ?> - لوحه التحكم </title>
 <?php require_once 'inc/header.php'; ?>
 <?php require_once 'inc/navbar.php'; ?>
@@ -48,7 +46,6 @@ $category = new Category();
                                </thead>
                                <tbody>
                                <?php
-                               $cat = $category->displayCategory();
                                $id = 1;
                                if (!empty($cat)):
                                    foreach ($cat as $row):

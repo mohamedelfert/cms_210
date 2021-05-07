@@ -83,6 +83,17 @@ class Category extends MysqliConnect {
         }
     }
 
+    public function displayCategoryNavbar(){
+        $this->query('*', "category", "ORDER BY id DESC LIMIT 4");
+        $this->execute();
+        if ($this->rowCount() > 0){
+            while ($row = $this->fetch()){
+                $rows[] = $row;
+            }
+            return $rows;
+        }
+    }
+
     public function deleteCategory($id){
         $this->cat_id = (int)$this->esc($id);
         $this->query('id', 'category', "WHERE id = '$this->cat_id'");

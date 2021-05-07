@@ -13,3 +13,5 @@ if (isset($_GET['logout']) and $_GET['logout'] == true){
     session_destroy();
     header("Location: index.php");
 }
+
+$category = new Category();

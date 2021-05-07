@@ -18,10 +18,12 @@
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-th-list"></i> أقسام الموقع <span class="caret"></span></a>
           <ul class="dropdown-menu">
-              <li><a href="#"><i class="glyphicon glyphicon-menu-left"></i> تيوبات ترفيهية</a></li>
-              <li><a href="#"><i class="glyphicon glyphicon-menu-left"></i> تيوبات رياضية</a></li>
-              <li><a href="#"><i class="glyphicon glyphicon-menu-left"></i> تيوبات تعليمية</a></li>
-              <li><a href="#"><i class="glyphicon glyphicon-menu-left"></i> تيوبات ثقافية</a></li>
+              <?php
+              $cat = $category->displayCategoryNavbar();
+              foreach ($cat as $row):
+              ?>
+              <li><a href="category.php?cat=<?php echo $row['cat_unique']; ?>"><i class="glyphicon glyphicon-menu-left"></i><?php echo $row['cat_name']; ?></a></li>
+              <?php endforeach; ?>
           </ul>
         </li>
       </ul>
