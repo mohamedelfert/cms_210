@@ -4,6 +4,7 @@
 class Category extends MysqliConnect {
     private $cat_name;
     private $cat_unique;
+    private $cat_id;
 
     public function addSetInput($name,$link){
         $this->cat_name   = $this->filter_string($this->esc($this->html_tags($name)));
@@ -56,7 +57,7 @@ class Category extends MysqliConnect {
         if ($this->execute()){
             Messages::setMessage('success','رائع','تم اضافه القسم بنجاح');
             echo Messages::getMessage();
-            echo '<meta http-equiv="refresh" content="3; \'category.php\'">';
+            echo '<meta http-equiv="refresh" content="2; \'category.php\'">';
             return true;
         }
         return false;
@@ -68,6 +69,73 @@ class Category extends MysqliConnect {
                 Messages::setMessage('danger','خطأ','حصل خطأ غير متوقع بالنظام');
                 echo Messages::getMessage();
             }
+        }
+    }
+
+    public function displayCategory(){
+        $this->query('*', "category", "ORDER BY id DESC");
+        $this->execute();
+        if ($this->rowCount() > 0){
+            while ($row = $this->fetch()){
+                $rows[] = $row;
+            }
+            return $rows;
+        }
+    }
+
+    public function deleteCategory($id){
+        $this->cat_id = (int)$this->esc($id);
+        $this->query('id', 'category', "WHERE id = '$this->cat_id'");
+        $this->execute();
+        if ($this->rowCount() > 0){
+            $this->delete('category', 'id', $this->cat_id);
+            if ($this->execute()){
+                Messages::setMessage('success','رائع','تم حذف القسم بنجاح');
+                echo Messages::getMessage();
+                echo '<meta http-equiv="refresh" content="2; \'category.php\'">';
+            }else{
+                Messages::setMessage('danger','خطأ','عفوا خطأ غير متوقع من النظام');
+                echo Messages::getMessage();
+                echo '<meta http-equiv="refresh" content="2; \'category.php\'">';
+            }
+        }else{
+            header("Location: category.php");
+        }
+    }
+
+    public function getCatInfo($id){
+        $this->cat_id = (int)$this->esc($id);
+        $this->query('*', 'category', "WHERE id = '$this->cat_id'");
+        $this->execute();
+        if ($this->rowCount() > 0){
+            return $this->fetch();
+        }else{
+            header("Location: category.php");
+        }
+    }
+
+    public function editCatInfo($name,$link,$id){
+        $link = str_replace(' ','-',$link);
+        $this->query('id', 'category', "WHERE cat_unique = '$link'");
+        $this->execute();
+        $fetchId = $this->fetch();
+        if($this->rowCount() > 0 and $fetchId['id'] == $id){
+            $this->update('category', "cat_name = '{$name}'", 'id', $id);
+            $this->execute();
+            Messages::setMessage('success', "تم", 'تحديث القسم بنجاح');
+            echo Messages::getMessage();
+            echo '<meta http-equiv="refresh" content="2; \'category.php\'">';
+        }else if($this->rowCount() > 0){
+            Messages::setMessage('danger', "خطأ", 'الاسم الفريد مسجل بالفعل قم بتسجيل اسم فريد آخر');
+            echo Messages::getMessage();
+            echo '<meta http-equiv="refresh" content="2;\'category.php\'">';
+        }
+        else{
+            $this->update('category', "cat_name = '{$name}' , cat_unique = '{$link}'", 'id', $id);
+            $this->execute();
+            Messages::setMessage('success', "تم", 'تحديث القسم بنجاح');
+            echo Messages::getMessage();
+            echo '<meta http-equiv="refresh" content="2; \'category.php\'">';
         }
     }
 }
