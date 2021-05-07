@@ -23,6 +23,15 @@ class Videos extends MysqliConnect{
         }elseif (empty($this->link)){
             Messages::setMessage('danger','خطأ','يجب وضع لينك للفيديو');
             echo Messages::getMessage();
+        }elseif ($this->image === null){
+            Messages::setMessage('danger','خطأ','يجب وضع صوره للفيديو');
+            echo Messages::getMessage();
+        }elseif (empty($this->description)){
+            Messages::setMessage('danger','خطأ','يجب وضع وصف بسيط للفيديو');
+            echo Messages::getMessage();
+        }elseif (empty($this->category)){
+            Messages::setMessage('danger','خطأ','يجب اختيار قسم للفيديو');
+            echo Messages::getMessage();
         }else{
             return TRUE;
         }
@@ -31,7 +40,8 @@ class Videos extends MysqliConnect{
 
     public function displayErrors(){
         if ($this->checkSetInput()){
-            echo "yes checked";
+            $files = new Upload($this->image);
+            echo $files->newFile();
         }
     }
 }
