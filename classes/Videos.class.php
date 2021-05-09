@@ -71,4 +71,15 @@ class Videos extends MysqliConnect{
     private function editVideo(){
         echo 'Edit';
     }
+
+    public function displayVideos(){
+        $this->query('*', "videos", "ORDER BY id DESC LIMIT 5");
+        $this->execute();
+        if ($this->rowCount() > 0){
+            while ($rows = $this->fetch()){
+                $rowVideos[] = $rows;
+            }
+            return $rowVideos;
+        }
+    }
 }

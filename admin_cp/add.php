@@ -12,7 +12,6 @@
                 <div class="col-md-12">
                     <?php
                     if (isset($_SERVER['REQUEST_METHOD']) and isset($_POST['add'])){
-                        $video = new Videos();
                         if (isset($_FILES['image']) and $_FILES['image']['name'] != ''){
                             $image = $_FILES['image'];
                         }else{

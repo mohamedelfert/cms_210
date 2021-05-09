@@ -149,4 +149,13 @@ class Category extends MysqliConnect {
             echo '<meta http-equiv="refresh" content="2; \'category.php\'">';
         }
     }
+
+    public function getCatNameById($id){
+        $this->query('cat_name', "category", "WHERE id = '$id'");
+        if ($this->execute() and $this->rowCount() > 0){
+            $catName = $this->fetch();
+            return $catName['cat_name'];
+        }
+        return false;
+    }
 }
