@@ -13,8 +13,12 @@
                     <?php
                     if (isset($_SERVER['REQUEST_METHOD']) and isset($_POST['add'])){
                         $video = new Videos();
-                        $image = (isset($_FILES['image']) ? $_FILES['image'] : null);
-                        $video->setVideosInput($_POST['title'],$_POST['link'],$image,$_POST['desc'],$_POST['category']);
+                        if (isset($_FILES['image']) and $_FILES['image']['name'] != ''){
+                            $image = $_FILES['image'];
+                        }else{
+                            $image = null;
+                        }
+                        $video->setVideosInput($_POST['title'],$_POST['link'],$image,$_POST['desc'],$_POST['category'],'add');
                         $video->displayErrors();
                     }
                     ?>
@@ -44,7 +48,7 @@
                             <div class="form-group">
                                 <label for="desc" class="col-sm-2 control-label">وصف الفيديو</label>
                                 <div class="col-sm-6">
-                                    <textarea class="form-control" name="desc" id="desc" rows="6" style="max-height: 250px;max-width: 585px;min-height: 150px;min-width: 585px;"><?php echo (isset($_POST['desc']) ? $_POST['desc'] : null);?></textarea>
+                                    <textarea class="form-control" name="desc" id="desc" rows="6" style="max-height: 250px;max-width: 585px;min-height: 150px;min-width: 585px;" placeholder="ادخل وصف بسيط الفيديو"><?php echo (isset($_POST['desc']) ? $_POST['desc'] : null);?></textarea>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -53,7 +57,7 @@
                                     <select class="form-control" id="category" name="category">
                                         <option value="">اختر القسم</option>
                                         <?php foreach ($cat as $value):?>
-                                        <option value="<?php echo $value['id']; ?>"><?php echo $value['cat_name']; ?></option>
+                                        <option value="<?php echo $value['id']; ?>" <?php if (isset($_POST['category']) and $_POST['category'] == $value['id']){echo "selected";} ?>><?php echo $value['cat_name']; ?></option>
                                         <?php endforeach; ?>
                                     </select>
                                 </div>
