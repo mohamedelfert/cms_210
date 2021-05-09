@@ -66,6 +66,7 @@ class Videos extends MysqliConnect{
             echo Messages::getMessage();
             echo '<meta http-equiv="refresh" content="2; \'tubes.php\'">';
         }
+        return FALSE;
     }
 
     private function editVideo(){
@@ -73,13 +74,26 @@ class Videos extends MysqliConnect{
     }
 
     public function displayVideos(){
-        $this->query('*', "videos", "ORDER BY id DESC LIMIT 5");
+        $this->query('*', 'videos', "ORDER BY id DESC LIMIT 10");
         $this->execute();
         if ($this->rowCount() > 0){
             while ($rows = $this->fetch()){
                 $rowVideos[] = $rows;
             }
             return $rowVideos;
+        }
+    }
+
+    public function displayVideoInfo($id = null){
+        $this->query('*', "videos",$id);
+        $this->execute();
+        if ($this->rowCount() > 0){
+            while ($rows = $this->fetch()){
+                $rowVideos[] = $rows;
+            }
+            return $rowVideos;
+        }else{
+            return null;
         }
     }
 }
