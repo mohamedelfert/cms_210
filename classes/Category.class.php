@@ -150,8 +150,8 @@ class Category extends MysqliConnect {
         }
     }
 
-    public function getCatNameById($id){
-        $this->query('cat_name', "category", "WHERE id = '$id'");
+    public function getCatNameById($other){
+        $this->query('cat_name', "category", "WHERE id = '$other'");
         if ($this->execute() and $this->rowCount() > 0){
             $catName = $this->fetch();
             return $catName['cat_name'];

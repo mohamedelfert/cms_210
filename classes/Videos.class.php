@@ -127,8 +127,8 @@ class Videos extends MysqliConnect{
         }
     }
 
-    public function displayVideoInfo($id = null){
-        $this->query('*', "videos",$id);
+    public function displayVideoInfo($other = null){
+        $this->query('*', "videos",$other);
         $this->execute();
         if ($this->rowCount() > 0){
             while ($rows = $this->fetch()){
