@@ -1,5 +1,5 @@
 <?php require_once 'inc/topHeader.php'; ?>
-    <title><?php echo SITENAME; ?> - لوحه التحكم </title>
+    <title><?php echo SITENAME; ?> - البريد الوارد </title>
 <?php require_once 'inc/header.php'; ?>
 <?php require_once 'inc/navbar.php'; ?>
 

@@ -158,4 +158,34 @@ class Category extends MysqliConnect {
         }
         return false;
     }
+
+    public function getCatNameUniqueById($other){
+        $this->query('cat_unique', "category", "WHERE id = '$other'");
+        if ($this->execute() and $this->rowCount() > 0){
+            $catNameUnique = $this->fetch();
+            return $catNameUnique['cat_unique'];
+        }
+        return false;
+    }
+
+    public function getCatNameUniqueByLink($other){
+        $this->query('cat_name', "category", "WHERE cat_unique = '$other'");
+        if ($this->execute() and $this->rowCount() > 0){
+            $catName = $this->fetch();
+            return $catName['cat_name'];
+        }
+        return false;
+    }
+
+    public function checkCategoryLink($id){
+        $id = $this->esc($id);
+        $this->query('id', 'category', "WHERE cat_unique = '{$id}'");
+        if ($this->execute() and $this->rowCount() > 0){
+            $id = $this->fetch();
+            return $id['id'];
+        }else{
+            header("Location: index.php");
+        }
+    }
+
 }
