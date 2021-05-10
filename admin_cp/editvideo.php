@@ -16,17 +16,15 @@
                         $video = $video->displayVideoInfo("WHERE `id` = '{$id}'");
                     }
 
-
                     if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['edit'])){
                         if(isset($_FILES['image']) and $_FILES['image']['name'] != ''){
                             $image = $_FILES['image'];
                         }else{
                             $image = NULL;
                         }
-                        $video->setVideosInput($_POST['title'], $_POST['link'],$image, $_POST['desc'], $_POST['category'] , "edit");
+                        $video->setVideosInput($_POST['title'], $_POST['link'],$image, $_POST['desc'], $_POST['category'] , "edit",$_POST['id']);
                         $video->displayErrors();
                     }
-
                     ?>
                 </div>
                 <h1 class="page-header"><i class="glyphicon glyphicon-play"></i> تعديل فيديو</h1>
@@ -116,7 +114,7 @@
                             <div class="form-group">
                                 <div class="col-sm-offset-2 col-sm-6">
                                     <input type="hidden" name="id" value="<?php echo $_POST['id']; ?>">
-                                    <button type="submit" id="edit" name="edit" class="btn btn-block btn-success">تعديل الفيديو</button>
+                                    <button type="submit" id="edit" name="edit" class="btn btn-block btn-warning">تعديل الفيديو</button>
                                 </div>
                             </div>
                         </form>

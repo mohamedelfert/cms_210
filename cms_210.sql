@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: May 09, 2021 at 02:14 PM
+-- Generation Time: May 10, 2021 at 12:23 AM
 -- Server version: 5.7.31
 -- PHP Version: 7.3.21
 
@@ -84,18 +84,17 @@ CREATE TABLE IF NOT EXISTS `videos` (
   `image` varchar(255) NOT NULL,
   `description` text NOT NULL,
   `category` int(100) NOT NULL,
+  `videoLink` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `videos`
 --
 
-INSERT INTO `videos` (`id`, `title`, `link`, `image`, `description`, `category`) VALUES
-(1, 'Create Simple Shopping Cart using PHP & MySql', 'https://www.youtube.com/watch?v=0wYSviHeRbs&t=997s', 'image6097cfa7e2971.png', 'If you are looking for video tutorial on how to make simple shopping care using PHP with Mysql. In this video tutorial I have show you how to display product on web page, how to add item to shopping cart and how to remove item from shopping cart by using PHP programming language with Mysql database.', 2),
-(2, 'Learn How to Create a Shopping Cart using PHP and MySQL', 'https://www.youtube.com/watch?v=fb8e3VAc7qQ&list=PLDmvslp_VR0xCNglSu1IuaEBsZ-aHY1Zv&index=5', 'image6097cfda76b88.png', 'In this series, we will create a shopping cart website using PHP and MySQL. You will also learn how to work with the Codeigniter Framework, MySQL, CRUD, PDO, Prepared Statements, Form Validation, and PayPal Express Checkout API.\r\n', 2),
-(3, 'كيفية بناء متجر إلكتروني على الووردبريس - متجر ووكومرس', 'https://www.youtube.com/watch?v=S20doQPCLns', 'image6097d0520d933.png', 'يستعرض الفيديو كيفية بناء متجر إلكتروني على الووردبريس - متجر ووكومرس، وتعتبر هذه الخطوة رئيسية لكثير ممن يرغبون بالدخول لمجال التجارة الإلكترونية، حيث يستطيع التاجر بعد الإنتهاء من متابعته للفيديو من بناء متجر إلكتروني متكامل قادر على اتمام عمليات بيع للعملاء بالمناطق التي يرغب بها ، يشرح الفيديو بالتفصيل كيفية إنشاء متجر إلكتروني في ووردبريس وكيفية تصميم متجر الكتروني خطوة بخطوة مع الكثير من النصائح الخاصة بالسيو وتسريع الموقع لضمان الحصول من المبيعات. لأي اسئلة أو استفسارات الرجاء عدم التردد بطرحها بقسم الكومنت ويسرني مساعدتك', 2),
-(4, 'تجربه تحديث او تعديل علي المقال', 'hhhh', 'image6097e9b098d33.png', 'hhjghjghjghjj', 3);
+INSERT INTO `videos` (`id`, `title`, `link`, `image`, `description`, `category`, `videoLink`) VALUES
+(13, 'Create Simple Shopping Cart using PHP & MySql', 'https://www.youtube.com/watch?v=0wYSviHeRbs&t=997s', 'image60987c2c46709.png', 'If you are looking for video tutorial on how to make simple shopping care using PHP with Mysql. In this video tutorial I have show you how to display product on web page, how to add item to shopping cart and how to remove item from shopping cart by using PHP programming language with Mysql database.', 2, '2770jz0v88j0'),
+(14, 'كيفية بناء متجر إلكتروني على الووردبريس - متجر ووكومرس', 'https://www.youtube.com/watch?v=S20doQPCLns', 'image60987c7533a42.png', 'يستعرض الفيديو كيفية بناء متجر إلكتروني على الووردبريس - متجر ووكومرس، وتعتبر هذه الخطوة رئيسية لكثير ممن يرغبون بالدخول لمجال التجارة الإلكترونية، حيث يستطيع التاجر بعد الإنتهاء من متابعته للفيديو من بناء متجر إلكتروني متكامل قادر على اتمام عمليات بيع للعملاء بالمناطق التي يرغب بها ، يشرح الفيديو بالتفصيل كيفية إنشاء متجر إلكتروني في ووردبريس وكيفية تصميم متجر الكتروني خطوة بخطوة مع الكثير من النصائح الخاصة بالسيو وتسريع الموقع لضمان الحصول من المبيعات.', 2, '1m52u8t0nhit');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

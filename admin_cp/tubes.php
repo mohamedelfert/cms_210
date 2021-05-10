@@ -9,6 +9,12 @@
             <?php require_once 'inc/sidbar.php'; ?>
 
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                <?php
+                    if($_SERVER['REQUEST_METHOD'] == "GET" and isset($_GET['delete'])){
+                        $id = (int)$_GET['delete'];
+                        $video = $video->deleteVideo($id);
+                    }
+                ?>
                 <h1 class="page-header"><i class="glyphicon glyphicon-film"></i> الفيديوهات بالموقع</h1>
                 <div class="col-md-12">
                     <div class="row">
@@ -29,7 +35,6 @@
                                     </thead>
                                     <tbody>
                                     <?php
-                                    $tubes  = $video->displayVideos();
                                     $id = 1;
                                     if (!empty($tubes)):
                                         foreach ($tubes as $tube):
@@ -40,7 +45,7 @@
                                             <td><?php echo substr($tube['title'],0,120); ?> ...</td>
                                             <td><?php echo $category->getCatNameById($tube['category']); ?></td>
                                             <td>1</td>
-                                            <td><a href="" class="btn btn-sm btn-info">مشاهده</a></td>
+                                            <td><a href="../video.php?v=<?php echo $tube['videoLink']; ?>" class="btn btn-sm btn-info">مشاهده</a></td>
                                             <td><a href="editvideo.php?id=<?php echo $tube['id']; ?>" class="btn btn-sm btn-warning">تعديل</a></td>
                                             <td><a href="tubes.php?delete=<?php echo $tube['id']; ?>" class="btn btn-sm btn-danger">حذف</a></td>
                                         </tr>
