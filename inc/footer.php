@@ -54,7 +54,7 @@
                     instagram: "medo_elfert", // Instagram username
                     call_to_action: "تواصل معنا ", // Call to action
                     button_color: "#67ce50", // Color of button
-                    position: "left", // Position may be 'right' or 'left'
+                    position: "right", // Position may be 'right' or 'left'
                     order: "whatsapp,instagram", // Order of buttons
                     pre_filled_message: "استفسار !", // WhatsApp pre-filled message
                 };

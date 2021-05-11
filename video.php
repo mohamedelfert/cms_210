@@ -6,6 +6,16 @@ $videos = $video->displayVideoInfo("WHERE id = '$id'");
 foreach ($videos as $videoId){
     $videoId;
 }
+
+$video->updateVideoViews($videoId['id']);
+
+if ($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['add'])){
+    if (!empty($_POST['comment'])){
+        $comment = $video->addNewComment($videoId['id'],$_POST['comment'],$_GET['v']);
+    }else{
+        echo "ادخل تعليق";
+    }
+}
 ?>
     <title><?php echo SITENAME . '-' . $videoId['title']; ?></title>
 <?php require_once 'inc/header.php'; ?>
@@ -25,7 +35,7 @@ foreach ($videos as $videoId){
                         <h3 style="margin: 5px 0 15px 0;background: #6a696a7d;padding: 8px;color: #FFFFFF;"><?php echo $videos[0]['title'];?></h3>
                         <iframe width="100%" height="460" src="https://www.youtube.com/embed/<?php echo str_replace('https://www.youtube.com/watch?v=','',$videos[0]['link']);?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         <div style="background: #f9f7f7;padding: 8px 2px;border-radius: 4px;border: solid 1px #efecec;">
-                            <p class="pull-left" style="padding: 0px 10px;margin-bottom: 0px;">11 <i class=" glyphicon glyphicon-eye-open"></i></p>
+                            <p class="pull-left" style="padding: 0px 10px;margin-bottom: 0px;"><?php echo $videos[0]['views'];?> <i class=" glyphicon glyphicon-eye-open"></i></p>
                             <p class="pull-right" style="padding: 0px 10px;margin-bottom: 0px;"><i class="glyphicon glyphicon-list"></i> القسم : <a href="category.php?cat=<?php echo $category->getCatNameUniqueById($videos[0]['category']);?>"><?php echo $category->getCatNameById($videos[0]['category']);?></a></p>
                             <div class="clearfix"></div>
                         </div>
@@ -34,29 +44,46 @@ foreach ($videos as $videoId){
 
                     <hr>
 
-                    <form class="form-horizontal">
-                        <div class="form-group">
-                            <div class="col-sm-12">
-                                <textarea name="comment" id="comment" class="form-control" style="max-height: 80px;height: 80px;max-width: 735px;width: 735px" placeholder="اكتب التعليق هنا"></textarea>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-sm-12">
-                                <button type="submit" name="add" id="add" class="btn btn-success">اضافه التعليق</button>
-                            </div>
-                        </div>
-                    </form>
+                    <?php if (isset($_SESSION['is_logged']) and $_SESSION['is_logged'] == true):?>
+                            <form action="<?php echo $_SERVER['PHP_SELF']?>?v=<?php echo $_GET['v'];?>" method="POST" class="form-horizontal">
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <textarea name="comment" id="comment" class="form-control" style="max-height: 80px;height: 80px;max-width: 735px;width: 735px" placeholder="اكتب التعليق هنا"></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-12">
+                                        <button type="submit" name="add" id="add" class="btn btn-success">اضافه التعليق</button>
+                                    </div>
+                                </div>
+                            </form>
+                    <?php endif;?>
 
                     <div id="commentResult"></div>
 
-                    <div style="margin: 20px 0;">
-                        <div style="background: #d2d2d2;padding: 5px;">
-                            <div class="pull-right"><p><i class="glyphicon glyphicon-user"></i> <span>اسم المعلق</span></p></div>
-                            <div class="pull-left"><a id="deleteReply" rel="11" data-toggle="tooltip" data-placement="top" title="حذف التعليق"><i class="glyphicon glyphicon-trash" style="color: #f56e6e"></i></a></div>
-                            <div class="clearfix"></div>
-                            <div style="background: #fff;padding: 4px;border-radius: 4px;border: solid 1px #d0d0d0;">التعليق هنا</div>
-                        </div>
-                    </div>
+                    <?php
+                    $videoComments = $video->getVideoComments($videoId['id']);
+                    if (!empty($videoComments)):
+                        foreach ($videoComments as $comment):
+                    ?>
+                            <div style="margin: 20px 0;">
+                                <div style="background: #d2d2d2;padding: 5px;">
+                                    <div class="pull-right"><p><i class="glyphicon glyphicon-user"></i> <span><?php echo ucwords($video->getUserNameById($comment['user_id']));?></span></p></div>
+                                    <?php if (isset($_SESSION['is_logged']) and $_SESSION['is_logged'] == true and $_SESSION['user']['id'] == $comment['user_id']):?>
+                                            <div class="pull-left"><a id="deleteReply" rel="<?php echo $comment['id'];?>" data-toggle="tooltip" data-placement="top" title="حذف التعليق"><i class="glyphicon glyphicon-trash" style="color: #f56e6e"></i></a></div>
+                                    <?php endif;?>
+                                    <div class="clearfix"></div>
+                                    <div style="background: #fff;padding: 4px;border-radius: 4px;border: solid 1px #d0d0d0;"><?php echo $comment['comment'];?></div>
+                                </div>
+                            </div>
+                    <?php
+                        endforeach;
+                    else:
+                    ?>
+                            <div class="alert alert-danger alert-dismissible text-center" role="alert">
+                                <strong>تنبيه !</strong> لا يوجد اي تعليقات حاليا
+                            </div>
+                    <?php endif;?>
 
                 </div>
 
@@ -87,3 +114,10 @@ foreach ($videos as $videoId){
     <!-- END INDEX MAIN -->
     <!-- FOOTER START -->
 <?php require_once 'inc/footer.php'; ?>
+
+<script>
+    $("[id = deleteReply]").on("click",function (){
+        var id = $(this).attr('rel');
+        alert(id);
+    });
+</script>

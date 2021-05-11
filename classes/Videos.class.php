@@ -171,4 +171,47 @@ class Videos extends MysqliConnect{
             }
         }
     }
+
+    public function updateVideoViews($id){
+        $this->query('views', 'videos', "WHERE id = '$id'");
+        if ($this->execute() and $this->rowCount() > 0){
+            $views = $this->fetch();
+            $newView = $views['views'] + 1;
+            $this->update('videos', "views = '$newView'", 'id',$id);
+            $this->execute();
+        }
+    }
+
+    public function addNewComment($videoId,$comment,$dir){
+        $videoId = (int)$videoId;
+        $comment = $this->filter_string($this->esc($this->html_tags($comment)));
+        $userId  = $_SESSION['user']['id'];
+        $this->insert('comments', "`user_id`, `video_id`, `comment`", "'$userId','$videoId','$comment'");
+        if ($this->execute()){
+            header("Location: video.php?v=$dir");
+        }
+    }
+
+    public function getVideoComments($id){
+        $id = (int)$id;
+        $this->query('*', 'comments', "WHERE `video_id` = '$id' ORDER BY id DESC");
+        if ($this->execute() and $this->rowCount() > 0){
+            while ($comments = $this->fetch()){
+                $comment[] = $comments;
+            }
+            return $comment;
+        }else{
+            return null;
+        }
+    }
+
+    public function getUserNameById($id){
+        $id = (int)$id;
+        $this->query("`first_name`,`last_name`", 'users', "WHERE id = '$id'");
+        if ($this->execute() and $this->rowCount() > 0){
+            $user = $this->fetch();
+            return $user['first_name'] . ' ' . $user['last_name'];
+        }
+        return null;
+    }
 }
