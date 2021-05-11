@@ -29,6 +29,14 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['add'])){
 
     <main class="container">
         <div class="row">
+            <div class="col col-lg-8">
+            <?php
+            if ($_SERVER['REQUEST_METHOD'] == "GET" and isset($_GET['delete']) and isset($_SESSION['is_logged'])){
+                $id = (int)$_GET['delete'];
+                $video->deleteVideoComment($id,$_GET['v']);
+            }
+            ?>
+            </div>
             <article class="col-xs-12 col-md-12" style="min-height: 290px;">
                 <div class="col-md-8" style="background: rgb(167 163 163 / 35%);margin-bottom: 20px;padding: 10px;border-radius: 10px;">
                     <div>
@@ -70,10 +78,11 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['add'])){
                                 <div style="background: #d2d2d2;padding: 5px;">
                                     <div class="pull-right"><p><i class="glyphicon glyphicon-user"></i> <span><?php echo ucwords($video->getUserNameById($comment['user_id']));?></span></p></div>
                                     <?php if (isset($_SESSION['is_logged']) and $_SESSION['is_logged'] == true and $_SESSION['user']['id'] == $comment['user_id']):?>
-                                            <div class="pull-left"><a id="deleteReply" rel="<?php echo $comment['id'];?>" data-toggle="tooltip" data-placement="top" title="حذف التعليق"><i class="glyphicon glyphicon-trash" style="color: #f56e6e"></i></a></div>
+                                            <div class="pull-left"><a href="video.php?v=<?php echo $_GET['v'];?>&delete=<?php echo $comment['id'];?>" id="deleteReply" rel="<?php echo $comment['id'];?>" data-toggle="tooltip" data-placement="top" title="حذف التعليق"><i class="glyphicon glyphicon-trash" style="color: #f56e6e"></i></a></div>
                                     <?php endif;?>
                                     <div class="clearfix"></div>
                                     <div style="background: #fff;padding: 4px;border-radius: 4px;border: solid 1px #d0d0d0;"><?php echo $comment['comment'];?></div>
+                                    <div class="pull-left" style="margin: 5px;"><i class="glyphicon glyphicon-time"></i> <span><?php echo $comment['commDate'];?></span></div>
                                 </div>
                             </div>
                     <?php
@@ -118,6 +127,5 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['add'])){
 <script>
     $("[id = deleteReply]").on("click",function (){
         var id = $(this).attr('rel');
-        alert(id);
     });
 </script>

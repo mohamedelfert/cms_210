@@ -214,4 +214,14 @@ class Videos extends MysqliConnect{
         }
         return null;
     }
+
+    public function deleteVideoComment($id,$dir){
+        $this->delete('comments', 'id',$id);
+        if ($this->execute()){
+            header("Location: video.php?v=$dir");
+        }else{
+            Messages::setMessage('danger','خطأ','غير متوقع أثناء الحذف');
+            echo Messages::getMessage();
+        }
+    }
 }
