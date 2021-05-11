@@ -11,7 +11,7 @@
 
     <main class="container">
         <div class="row">
-            <article class="col-xs-12 col-md-12">
+            <article class="col-xs-12 col-md-12" style="min-height: 290px;">
                 <div class="col-md-7 col-md-offset-3" style="padding: 0px">
                     <?php
                     if ($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['register'])){

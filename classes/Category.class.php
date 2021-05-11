@@ -168,7 +168,7 @@ class Category extends MysqliConnect {
         return false;
     }
 
-    public function getCatNameUniqueByLink($other){
+    public function getCatNameByLink($other){
         $this->query('cat_name', "category", "WHERE cat_unique = '$other'");
         if ($this->execute() and $this->rowCount() > 0){
             $catName = $this->fetch();

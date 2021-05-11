@@ -5,7 +5,7 @@
           <h1>أهلا وسهلاً بكم</h1>
           <p>موقع تيوباتي يرحب بالجميع ويتمنى لكم قضاء اسعد الاوقات معنا</p>
           <p><?php if (isset($_GET['cat'])){
-                        echo 'قسم : ' . $category->getCatNameUniqueByLink($_GET['cat']);
+                        echo 'قسم : ' . $category->getCatNameByLink($_GET['cat']);
                    }
               ?></p>
         </div>

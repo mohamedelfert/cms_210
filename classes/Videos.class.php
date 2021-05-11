@@ -27,6 +27,9 @@ class Videos extends MysqliConnect{
         }elseif (empty($this->link)){
             Messages::setMessage('danger','خطأ','يجب وضع لينك للفيديو');
             echo Messages::getMessage();
+        }elseif (!preg_match("~(?:https?://)?(?:www\.)?youtu(?:be\.com/watch\?(?:.*?&(?:amp;)?)?v=|\.be/)([\w\-]+)(?:&(?:amp;)?[\w\?=]*)?~",$this->link)){
+            Messages::setMessage('danger','خطأ','يجب وضع لينك يوتيوب صحيح');
+            echo Messages::getMessage();
         }elseif ($this->image === null and $this->type === 'add'){
             Messages::setMessage('danger','خطأ','يجب وضع صوره للفيديو');
             echo Messages::getMessage();
@@ -137,6 +140,35 @@ class Videos extends MysqliConnect{
             return $rowVideos;
         }else{
             return null;
+        }
+    }
+
+    public function checkVideoUrl($id){
+        $id = $this->esc($this->html_tags($id));
+        $this->query('id', 'videos', "WHERE `videoLink` = '{$id}'");
+        if ($this->execute() and $this->rowCount() > 0){
+            $id = $this->fetch();
+            return $id['id'];
+        }else{
+            header("Location: index.php");
+        }
+    }
+
+    public function likeVideos($title,$category,$id){
+        $this->query("`title`, `videoLink`, `image`", 'videos', "WHERE title LIKE '%$title%' AND id != '$id' ORDER BY RAND() LIMIT 4");
+        if ($this->execute() and $this->rowCount() > 0){
+            while ($videos = $this->fetch()){
+                $videoLike[] = $videos;
+            }
+            return $videoLike;
+        }else{
+            $this->query("`title`, `videoLink`, `image`", 'videos', "WHERE category = '$category' AND id != '$id' ORDER BY RAND() LIMIT 4");
+            if ($this->execute() and $this->rowCount() > 0){
+                while ($videos = $this->fetch()){
+                    $videoLike[] = $videos;
+                }
+                return $videoLike;
+            }
         }
     }
 }

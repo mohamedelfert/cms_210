@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: May 10, 2021 at 11:25 AM
+-- Generation Time: May 11, 2021 at 11:56 AM
 -- Server version: 5.7.31
 -- PHP Version: 7.3.21
 
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `category` (
   `cat_name` varchar(50) NOT NULL,
   `cat_unique` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `category`
@@ -42,7 +42,8 @@ CREATE TABLE IF NOT EXISTS `category` (
 INSERT INTO `category` (`id`, `cat_name`, `cat_unique`) VALUES
 (1, 'تيوبات رياضيه', 'sport-tubes'),
 (2, 'تيوبات تعليميه', 'learn-tubes'),
-(3, 'تيوبات ترفيهيه', 'fun-tubes');
+(3, 'تيوبات ترفيهيه', 'fun-tubes'),
+(4, 'تيوبات ثقافيه', 'culture-tube');
 
 -- --------------------------------------------------------
 
@@ -86,7 +87,7 @@ CREATE TABLE IF NOT EXISTS `videos` (
   `category` int(100) NOT NULL,
   `videoLink` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4;
+) ENGINE=MyISAM AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `videos`
@@ -99,7 +100,9 @@ INSERT INTO `videos` (`id`, `title`, `link`, `image`, `description`, `category`,
 (16, 'النفخة الكدابة - علي كاكولي', 'https://www.youtube.com/watch?v=PhX4nWfUpWo', 'image609912030615b.jpg', 'كلمات الأغنية:\r\nطب كنت فين يا لأ لما لما أنا قلت آه \r\nوكنت فين يا عقلي لما لما مشيت وراه \r\nبعد لما فقت لقيت الموت بجد أرحم، من إني أعيش لو ثانية وحدة كمان معاه. \r\nهيقول ارجع لو عشان سبتو مش ناقصة كآبة \r\nفي ناس تمسك فيك لما تكون هيا المتسابة \r\nنافخ نفسه وعلى ايه وعليه \r\nليه نافش ريشو\r\nهبعد عنو عنو ما بق من النفخة الكدابة \r\nمع مرور الوقت عرفت عرفت اني نجيت \r\nأول ما خدت بعضي أنا وبعيد بعيد مشيت \r\nده  أنا أكبر مقلب خدتو كان في حياتي هو\r\nده كان كابوس والحمد لله إني خلاص صحيت', 3, '734buf8iigz'),
 (17, 'إزاي عملت مكتب كمبيوتر للشغل والجيمينج', 'https://www.youtube.com/watch?v=tuFnILixhNk', 'image609912557a9e0.jpg', 'كفريلانسر بقضي وقت كتير جدًا على الكمبيوتر، في الفيديو دا هوريكم ازاي عملت المكتب دا بأماكن تخزين كتيرة بحيث يكون المكتب فاضي ومعليهوش كراكيب كتير\r\n', 3, '3tglqpdptsgl'),
 (18, 'Full-Time Scenes As Manchester City Defeat PSG To Reach First Champions League Final!', 'https://www.youtube.com/watch?v=OE5JU0bUaIk', 'image609913040a87c.jpg', 'Manchester City defeat PSG 4-1 on aggregate to reach the Champions League final for the very first time.\r\n', 1, 'bymridkni10'),
-(19, 'All Sports Trick Shots | Dude Perfect', 'https://www.youtube.com/watch?v=bIDKhZ_4jLQ', 'image6099134849555.jpg', 'Trick shots from all your favorite sports!\r\n', 1, '2aay6a4m6tzc');
+(19, 'All Sports Trick Shots | Dude Perfect', 'https://www.youtube.com/watch?v=bIDKhZ_4jLQ', 'image6099134849555.jpg', 'Trick shots from all your favorite sports!\r\n', 1, '2aay6a4m6tzc'),
+(20, 'عملت حاجات مجنونة بالطابعة ثلاثية الأبعاد | 3D Printer !', 'https://www.youtube.com/watch?v=zJ4NVSvQi2o', 'image609a6520031b2.jpg', 'عملت حاجات مجنونة بالطابعة ثلاثية الأبعاد | 3D Printer !\r\n', 3, '3spguaion4w'),
+(21, 'ازاى تجمع جهازك', 'https://www.youtube.com/watch?v=DvVMojkL6JQ', 'image609a662589f55.png', 'ازاى تجمع جهازك مع عمر عبد الرحيم ؟ بدون حرق', 3, '4aw93qpskkrp');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
