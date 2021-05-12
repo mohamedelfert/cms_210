@@ -17,3 +17,5 @@ if (isset($_GET['logout']) and $_GET['logout'] == true){
 $category = new Category();
 
 $video = new Videos();
+
+$contact = new Contact();

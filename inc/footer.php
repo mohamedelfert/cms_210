@@ -21,24 +21,25 @@
                         <h4 class="modal-title" id="myModalLabel">اتصل بنا</h4>
                     </div>
                     <div class="modal-body">
-                        <form>
+                        <form id="messages">
                             <div class="form-group">
                                 <label for="email">بريدك الإلكتروني</label>
-                                <input type="email" class="form-control" id="email" placeholder="البريد الاكتروني">
+                                <input type="email" name="email" class="form-control" id="email" placeholder="البريد الاكتروني">
                             </div>
                             <div class="form-group">
                                 <label for="username">الاسم</label>
-                                <input type="text" class="form-control" id="username" placeholder="اسمك">
+                                <input type="text" name="username" class="form-control" id="username" placeholder="اسمك">
                             </div>
                             <div class="form-group">
                                 <label for="message">الرسالة</label>
-                                <textarea class="form-control" rows="4" id="message"></textarea>
+                                <textarea class="form-control" rows="4" name="message" id="message"></textarea>
                             </div>
+                            <div id="result"></div>
                         </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">اغلاق</button>
-                        <button type="button" class="btn btn-success">ارسال الرسالة</button>
+                        <button type="button" onclick="sendMessages()" class="btn btn-success">ارسال الرسالة</button>
                     </div>
                 </div>
             </div>
@@ -74,6 +75,20 @@
             $(function () {
                 $('[data-toggle="tooltip"]').tooltip()
             })
+
+            function sendMessages(){
+                var data = $('#messages').serialize();
+                $.ajax({
+                    url: 'inc/ajax/contact.php',
+                    type: "POST",
+                    data: data,
+                    beforeSend: function(){
+                        $('#result').html('<div class="text-center"><img src="libs/image/load 4.gif" height="80px" width="25%"/></div>');
+                    },success: function (e){
+                        $('#result').html(e);
+                    }
+                });
+            }
         </script>
     </body>
 </html>

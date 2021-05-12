@@ -20,10 +20,10 @@
           ?>
                       <div class="col-md-4" style="position: relative;">
                           <div style="position: absolute;left: 65px;top: 10px;color: #3a3636;font-size: 12px;" data-toggle="tooltip" data-placement="top" title="المشاهدات">
-                              <i class="glyphicon glyphicon-eye-open" style="color: #c7c7c7;" ></i> 22
+                              <i class="glyphicon glyphicon-eye-open" style="color: #c7c7c7;" ></i> <?php echo $video->getCountViews($value['id']);?>
                           </div>
                           <div style="position: absolute;left: 25px;top: 10px;color: #3a3636;font-size: 12px;" data-toggle="tooltip" data-placement="top" title="التعليقات">
-                              <i class="glyphicon glyphicon-comment" style="color: #d0c358;"></i> 22
+                              <i class="glyphicon glyphicon-comment" style="color: #d0c358;"></i> <?php echo $video->getCountComments($value['id']);?>
                           </div>
                           <div style="padding: 5px;background: #f6f5f7;border: solid 1px #e7e7e7;margin-bottom: 20px;">
                             <div style="max-height: 190px;min-height: 190px;"><img src="libs/upload/<?php echo $value['image']; ?>" class="img-responsive" style="width: 100%;min-height: 20px;max-height: 190px;" /></div>

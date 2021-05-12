@@ -239,4 +239,22 @@ class Videos extends MysqliConnect{
         return false;
     }
 
+    public function getCountViews($id){
+        $this->query('views', "videos", "WHERE id = '$id'");
+        if ($this->execute() and $this->rowCount() > 0){
+            $views = $this->fetch();
+            return $views['views'];
+        }else{
+            return 0;
+        }
+    }
+
+    public function getCountComments($id){
+        $this->query('id', "comments", "WHERE `video_id` = '$id'");
+        if ($this->execute() and $this->rowCount() > 0){
+            return $this->rowCount();
+        }else{
+            return 0;
+        }
+    }
 }
