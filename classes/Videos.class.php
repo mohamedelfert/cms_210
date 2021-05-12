@@ -215,6 +215,9 @@ class Videos extends MysqliConnect{
         return null;
     }
 
+/**
+ * this method i use when url contain delete i use $_GET to check delete variable and then start this function to delete comment
+ */
     public function deleteVideoComment($id,$dir,$other = null){
         $this->delete('comments', 'id',$id,$other);
         if ($this->execute()){
@@ -224,4 +227,16 @@ class Videos extends MysqliConnect{
             echo Messages::getMessage();
         }
     }
+
+/**
+ * this method i use when use ajax
+ */
+    public function deleteCommentWithAjax($id){
+        $this->delete('comments', 'id',$id);
+        if ($this->execute()){
+            return true;
+        }
+        return false;
+    }
+
 }
