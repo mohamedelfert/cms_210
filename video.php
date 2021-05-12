@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['add'])){
     if (!empty($_POST['comment'])){
         $comment = $video->addNewComment($videoId['id'],$_POST['comment'],$_GET['v']);
     }else{
-        echo "ادخل تعليق";
+        $emptyCommMsg = Messages::setMessage('danger','خطأ','لا يجب ترك الحقل فارغ') . Messages::getMessage();
     }
 }
 ?>
@@ -33,8 +33,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['add'])){
             <?php
             if ($_SERVER['REQUEST_METHOD'] == "GET" and isset($_GET['delete']) and isset($_SESSION['is_logged'])){
                 $id = (int)$_GET['delete'];
-                $video->deleteVideoComment($id,$_GET['v']);
+                $video->deleteVideoComment($id,$_GET['v'],"AND user_id = '{$_SESSION['user']['id']}'");
             }
+
+            echo @$emptyCommMsg;
             ?>
             </div>
             <article class="col-xs-12 col-md-12" style="min-height: 290px;">

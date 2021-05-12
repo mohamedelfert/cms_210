@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: May 11, 2021 at 11:56 AM
+-- Generation Time: May 12, 2021 at 12:53 PM
 -- Server version: 5.7.31
 -- PHP Version: 7.3.21
 
@@ -48,6 +48,32 @@ INSERT INTO `category` (`id`, `cat_name`, `cat_unique`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `comments`
+--
+
+DROP TABLE IF EXISTS `comments`;
+CREATE TABLE IF NOT EXISTS `comments` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `video_id` int(11) NOT NULL,
+  `comment` text NOT NULL,
+  `commDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `comments`
+--
+
+INSERT INTO `comments` (`id`, `user_id`, `video_id`, `comment`, `commDate`) VALUES
+(19, 1, 13, 'تجربه تعليق ليس فارغ', '2021-05-12 12:41:05'),
+(23, 2, 14, 'محتوي قيم ومفيد', '2021-05-12 12:52:25'),
+(14, 1, 14, 'جيد جداا', '2021-05-11 23:07:35'),
+(13, 1, 13, 'تعليق جديد', '2021-05-11 23:07:07');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -86,6 +112,7 @@ CREATE TABLE IF NOT EXISTS `videos` (
   `description` text NOT NULL,
   `category` int(100) NOT NULL,
   `videoLink` varchar(255) NOT NULL,
+  `views` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4;
 
@@ -93,16 +120,16 @@ CREATE TABLE IF NOT EXISTS `videos` (
 -- Dumping data for table `videos`
 --
 
-INSERT INTO `videos` (`id`, `title`, `link`, `image`, `description`, `category`, `videoLink`) VALUES
-(13, 'Create Simple Shopping Cart using PHP & MySql', 'https://www.youtube.com/watch?v=0wYSviHeRbs&t=997s', 'image60987c2c46709.png', 'If you are looking for video tutorial on how to make simple shopping care using PHP with Mysql. In this video tutorial I have show you how to display product on web page, how to add item to shopping cart and how to remove item from shopping cart by using PHP programming language with Mysql database.', 2, '2770jz0v88j0'),
-(14, 'كيفية بناء متجر إلكتروني على الووردبريس - متجر ووكومرس', 'https://www.youtube.com/watch?v=S20doQPCLns', 'image60987c7533a42.png', 'يستعرض الفيديو كيفية بناء متجر إلكتروني على الووردبريس - متجر ووكومرس، وتعتبر هذه الخطوة رئيسية لكثير ممن يرغبون بالدخول لمجال التجارة الإلكترونية، حيث يستطيع التاجر بعد الإنتهاء من متابعته للفيديو من بناء متجر إلكتروني متكامل قادر على اتمام عمليات بيع للعملاء بالمناطق التي يرغب بها ، يشرح الفيديو بالتفصيل كيفية إنشاء متجر إلكتروني في ووردبريس وكيفية تصميم متجر الكتروني خطوة بخطوة مع الكثير من النصائح الخاصة بالسيو وتسريع الموقع لضمان الحصول من المبيعات.', 2, '1m52u8t0nhit'),
-(15, 'Simple Shopping Cart using PHP & MySql-2019', 'https://www.youtube.com/watch?v=6OAnZzCJFCk', 'image609908c985b68.png', 'shopping cart using PHP with Mysql. In this video tutorial, I have show you how to display product on a web page, how to add an item to shopping cart and how to remove an item from shopping cart by using PHP programming language with Mysql database.', 2, '45yhul0b5yh5'),
-(16, 'النفخة الكدابة - علي كاكولي', 'https://www.youtube.com/watch?v=PhX4nWfUpWo', 'image609912030615b.jpg', 'كلمات الأغنية:\r\nطب كنت فين يا لأ لما لما أنا قلت آه \r\nوكنت فين يا عقلي لما لما مشيت وراه \r\nبعد لما فقت لقيت الموت بجد أرحم، من إني أعيش لو ثانية وحدة كمان معاه. \r\nهيقول ارجع لو عشان سبتو مش ناقصة كآبة \r\nفي ناس تمسك فيك لما تكون هيا المتسابة \r\nنافخ نفسه وعلى ايه وعليه \r\nليه نافش ريشو\r\nهبعد عنو عنو ما بق من النفخة الكدابة \r\nمع مرور الوقت عرفت عرفت اني نجيت \r\nأول ما خدت بعضي أنا وبعيد بعيد مشيت \r\nده  أنا أكبر مقلب خدتو كان في حياتي هو\r\nده كان كابوس والحمد لله إني خلاص صحيت', 3, '734buf8iigz'),
-(17, 'إزاي عملت مكتب كمبيوتر للشغل والجيمينج', 'https://www.youtube.com/watch?v=tuFnILixhNk', 'image609912557a9e0.jpg', 'كفريلانسر بقضي وقت كتير جدًا على الكمبيوتر، في الفيديو دا هوريكم ازاي عملت المكتب دا بأماكن تخزين كتيرة بحيث يكون المكتب فاضي ومعليهوش كراكيب كتير\r\n', 3, '3tglqpdptsgl'),
-(18, 'Full-Time Scenes As Manchester City Defeat PSG To Reach First Champions League Final!', 'https://www.youtube.com/watch?v=OE5JU0bUaIk', 'image609913040a87c.jpg', 'Manchester City defeat PSG 4-1 on aggregate to reach the Champions League final for the very first time.\r\n', 1, 'bymridkni10'),
-(19, 'All Sports Trick Shots | Dude Perfect', 'https://www.youtube.com/watch?v=bIDKhZ_4jLQ', 'image6099134849555.jpg', 'Trick shots from all your favorite sports!\r\n', 1, '2aay6a4m6tzc'),
-(20, 'عملت حاجات مجنونة بالطابعة ثلاثية الأبعاد | 3D Printer !', 'https://www.youtube.com/watch?v=zJ4NVSvQi2o', 'image609a6520031b2.jpg', 'عملت حاجات مجنونة بالطابعة ثلاثية الأبعاد | 3D Printer !\r\n', 3, '3spguaion4w'),
-(21, 'ازاى تجمع جهازك', 'https://www.youtube.com/watch?v=DvVMojkL6JQ', 'image609a662589f55.png', 'ازاى تجمع جهازك مع عمر عبد الرحيم ؟ بدون حرق', 3, '4aw93qpskkrp');
+INSERT INTO `videos` (`id`, `title`, `link`, `image`, `description`, `category`, `videoLink`, `views`) VALUES
+(13, 'Create Simple Shopping Cart using PHP & MySql', 'https://www.youtube.com/watch?v=0wYSviHeRbs&t=997s', 'image60987c2c46709.png', 'If you are looking for video tutorial on how to make simple shopping care using PHP with Mysql. In this video tutorial I have show you how to display product on web page, how to add item to shopping cart and how to remove item from shopping cart by using PHP programming language with Mysql database.', 2, '2770jz0v88j0', 36),
+(14, 'كيفية بناء متجر إلكتروني على الووردبريس - متجر ووكومرس', 'https://www.youtube.com/watch?v=S20doQPCLns', 'image60987c7533a42.png', 'يستعرض الفيديو كيفية بناء متجر إلكتروني على الووردبريس - متجر ووكومرس، وتعتبر هذه الخطوة رئيسية لكثير ممن يرغبون بالدخول لمجال التجارة الإلكترونية، حيث يستطيع التاجر بعد الإنتهاء من متابعته للفيديو من بناء متجر إلكتروني متكامل قادر على اتمام عمليات بيع للعملاء بالمناطق التي يرغب بها ، يشرح الفيديو بالتفصيل كيفية إنشاء متجر إلكتروني في ووردبريس وكيفية تصميم متجر الكتروني خطوة بخطوة مع الكثير من النصائح الخاصة بالسيو وتسريع الموقع لضمان الحصول من المبيعات.', 2, '1m52u8t0nhit', 57),
+(15, 'Simple Shopping Cart using PHP & MySql-2019', 'https://www.youtube.com/watch?v=6OAnZzCJFCk', 'image609908c985b68.png', 'shopping cart using PHP with Mysql. In this video tutorial, I have show you how to display product on a web page, how to add an item to shopping cart and how to remove an item from shopping cart by using PHP programming language with Mysql database.', 2, '45yhul0b5yh5', 3),
+(16, 'النفخة الكدابة - علي كاكولي', 'https://www.youtube.com/watch?v=PhX4nWfUpWo', 'image609912030615b.jpg', 'كلمات الأغنية:\r\nطب كنت فين يا لأ لما لما أنا قلت آه \r\nوكنت فين يا عقلي لما لما مشيت وراه \r\nبعد لما فقت لقيت الموت بجد أرحم، من إني أعيش لو ثانية وحدة كمان معاه. \r\nهيقول ارجع لو عشان سبتو مش ناقصة كآبة \r\nفي ناس تمسك فيك لما تكون هيا المتسابة \r\nنافخ نفسه وعلى ايه وعليه \r\nليه نافش ريشو\r\nهبعد عنو عنو ما بق من النفخة الكدابة \r\nمع مرور الوقت عرفت عرفت اني نجيت \r\nأول ما خدت بعضي أنا وبعيد بعيد مشيت \r\nده  أنا أكبر مقلب خدتو كان في حياتي هو\r\nده كان كابوس والحمد لله إني خلاص صحيت', 3, '734buf8iigz', 105),
+(17, 'إزاي عملت مكتب كمبيوتر للشغل والجيمينج', 'https://www.youtube.com/watch?v=tuFnILixhNk', 'image609912557a9e0.jpg', 'كفريلانسر بقضي وقت كتير جدًا على الكمبيوتر، في الفيديو دا هوريكم ازاي عملت المكتب دا بأماكن تخزين كتيرة بحيث يكون المكتب فاضي ومعليهوش كراكيب كتير\r\n', 3, '3tglqpdptsgl', 18),
+(18, 'Full-Time Scenes As Manchester City Defeat PSG To Reach First Champions League Final!', 'https://www.youtube.com/watch?v=OE5JU0bUaIk', 'image609913040a87c.jpg', 'Manchester City defeat PSG 4-1 on aggregate to reach the Champions League final for the very first time.\r\n', 1, 'bymridkni10', 5),
+(19, 'All Sports Trick Shots | Dude Perfect', 'https://www.youtube.com/watch?v=bIDKhZ_4jLQ', 'image6099134849555.jpg', 'Trick shots from all your favorite sports!\r\n', 1, '2aay6a4m6tzc', 3),
+(20, 'عملت حاجات مجنونة بالطابعة ثلاثية الأبعاد | 3D Printer !', 'https://www.youtube.com/watch?v=zJ4NVSvQi2o', 'image609a6520031b2.jpg', 'عملت حاجات مجنونة بالطابعة ثلاثية الأبعاد | 3D Printer !\r\n', 3, '3spguaion4w', 13),
+(21, 'ازاى تجمع جهازك', 'https://www.youtube.com/watch?v=DvVMojkL6JQ', 'image609a662589f55.png', 'ازاى تجمع جهازك مع عمر عبد الرحيم ؟ بدون حرق', 3, '4aw93qpskkrp', 13);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

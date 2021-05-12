@@ -215,8 +215,8 @@ class Videos extends MysqliConnect{
         return null;
     }
 
-    public function deleteVideoComment($id,$dir){
-        $this->delete('comments', 'id',$id);
+    public function deleteVideoComment($id,$dir,$other = null){
+        $this->delete('comments', 'id',$id,$other);
         if ($this->execute()){
             header("Location: video.php?v=$dir");
         }else{
