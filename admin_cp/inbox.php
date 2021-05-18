@@ -11,8 +11,15 @@
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
                 <h1 class="page-header"><i class="glyphicon glyphicon-inbox"></i> البريد الوارد</h1>
                 <div class="col-md-12">
+                <?php
+                if ($_SERVER['REQUEST_METHOD'] == "GET" and isset($_GET['delete'])){
+                    $contact->deleteMessages($_GET['delete']);
+                }
+                ?>
+                </div>
+                <div class="col-md-12">
                     <div class="row">
-                        <div class="col-md-10 col-lg-offset-1">
+                        <div class="col-md-12">
                             <div class="table-responsive">
                                 <table class="table table-hover">
                                     <thead>
@@ -21,17 +28,34 @@
                                             <th>الاسم</th>
                                             <th>البريد الالكتروني</th>
                                             <th>الرساله</th>
+                                            <th>مشاهده</th>
                                             <th>حذف</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    <?php
+                                    $i = 1;
+                                    if (!empty($messages)):
+                                        foreach ($messages as $value):
+                                    ?>
                                         <tr>
-                                            <td>1</td>
-                                            <td>محمد</td>
-                                            <td>medo@yahoo.com</td>
-                                            <td>الرساله هنا</td>
-                                            <td><a href="" class="btn btn-sm btn-danger">حذف</a></td>
+                                            <td><?php echo $i++;?></td>
+                                            <td><?php echo $value['username'];?></td>
+                                            <td><?php echo $value['email'];?></td>
+                                            <td><?php echo $value['message'];?></td>
+                                            <td><a href="read.php?id=<?php echo $value['id'];?>" class="btn btn-sm btn-info">مشاهده</a></td>
+                                            <td><a href="inbox.php?delete=<?php echo $value['id'];?>" class="btn btn-sm btn-danger">حذف</a></td>
                                         </tr>
+                                    <?php
+                                        endforeach;
+                                    else:
+                                    ?>
+                                        <div class="alert alert-danger alert-dismissible text-center" role="alert">
+                                            <strong>تنبيه !</strong> لا يوجد اي رسائل حاليا
+                                        </div>
+                                    <?php
+                                    endif;
+                                    ?>
                                     </tbody>
                                 </table>
                             </div>

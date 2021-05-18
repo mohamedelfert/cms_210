@@ -11,3 +11,5 @@ if(isset($_SESSION['is_logged']) and $_SESSION['is_logged'] == TRUE and $_SESSIO
 $cat = $category->displayCategory();
 
 $tubes  = $video->displayVideos();
+
+$messages  = $contact->getMessages();
