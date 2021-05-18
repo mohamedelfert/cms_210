@@ -41,10 +41,10 @@
                                     ?>
                                         <tr class="text-center">
                                             <td><?php echo $id++; ?></td>
-                                            <td><img src="../libs/upload/<?php echo $tube['image']; ?>" alt="user_photo" class="img-thumbnail" style="width: 100px;height: 75px;"></td>
+                                            <td><img src="../libs/upload/<?php echo $tube['image']; ?>" alt="user_photo" width="70px" height="55px"></td>
                                             <td><?php echo substr($tube['title'],0,120); ?> ...</td>
                                             <td><?php echo $category->getCatNameById($tube['category']); ?></td>
-                                            <td>1</td>
+                                            <td><?php echo $video->getCountComments($tube['id']); ?></td>
                                             <td><a href="../video.php?v=<?php echo $tube['videoLink']; ?>" target="_blank" class="btn btn-sm btn-info">مشاهده</a></td>
                                             <td><a href="editvideo.php?id=<?php echo $tube['id']; ?>" class="btn btn-sm btn-warning">تعديل</a></td>
                                             <td><a href="tubes.php?delete=<?php echo $tube['id']; ?>" class="btn btn-sm btn-danger">حذف</a></td>

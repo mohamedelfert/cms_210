@@ -24,11 +24,11 @@
                                 <table class="table table-hover">
                                     <thead>
                                         <tr>
-                                            <th>#</th>
-                                            <th>اسم العضو</th>
-                                            <th>التعليق</th>
-                                            <th>مشاهده التعليق</th>
-                                            <th>حذف</th>
+                                            <th class="text-center">#</th>
+                                            <th class="text-center">اسم العضو</th>
+                                            <th class="text-center">التعليق</th>
+                                            <th class="text-center">مشاهده التعليق</th>
+                                            <th class="text-center">حذف</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -39,11 +39,11 @@
                                         foreach ($comments as $value):
                                     ?>
                                         <tr>
-                                            <td><?php echo $i++;?></td>
-                                            <td><?php echo $video->getUserNameById($value['user_id']);?></td>
-                                            <td><?php echo $value['comment'];?></td>
-                                            <td><a href="../video.php?v=<?php echo $video->getVideoById($value['video_id']);?>" target="_blank" class="btn btn-sm btn-info">مشاهده</a></td>
-                                            <td><a href="comments.php?delete=<?php echo $value['id'];?>" class="btn btn-sm btn-danger">حذف</a></td>
+                                            <td class="text-center"><?php echo $i++;?></td>
+                                            <td class="text-center"><?php echo $video->getUserNameById($value['user_id']);?></td>
+                                            <td class="text-center"><?php echo (mb_strlen($value['comment'],"utf8") > 50 ? mb_substr($value['comment'],0,50) . ' ...' : $value['comment']);?></td>
+                                            <td class="text-center"><a href="../video.php?v=<?php echo $video->getVideoById($value['video_id']);?>" target="_blank" class="btn btn-sm btn-info">مشاهده</a></td>
+                                            <td class="text-center"><a href="comments.php?delete=<?php echo $value['id'];?>" class="btn btn-sm btn-danger">حذف</a></td>
                                         </tr>
                                     <?php
                                         endforeach;

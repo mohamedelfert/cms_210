@@ -280,6 +280,24 @@ class Videos extends MysqliConnect{
         }
     }
 
+    public function countComments(){
+        $this->query('id', "comments");
+        if ($this->execute() and $this->rowCount() > 0){
+            return $this->rowCount();
+        }else{
+            return 0;
+        }
+    }
+
+    public function countVideos(){
+        $this->query('id', "Videos");
+        if ($this->execute() and $this->rowCount() > 0){
+            return $this->rowCount();
+        }else{
+            return 0;
+        }
+    }
+
     public function deleteAnyComment($id){
         $id = (int)$this->esc($id);
         $this->query('*', "comments", "WHERE id = '{$id}'");
