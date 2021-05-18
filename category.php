@@ -15,8 +15,15 @@ $id = $category->checkCategoryLink($_GET['cat']);
         <div class="row">
             <article class="col-xs-12 col-md-12" style="min-height: 240px">
                 <?php
-                if ($video->displayVideoInfo() > 0):
-                    $videos = $video->displayVideoInfo("WHERE `category` = '$id' ORDER BY RAND() , id DESC LIMIT 9");
+                if ($video->displayVideos() > 0):
+                    $per_page = 9;
+                    if (!isset($_GET['page'])){
+                        $page = 1;
+                    }else{
+                        $page = intval($_GET['page']);
+                    }
+                    $start = ($page - 1) * $per_page;
+                    $videos = $video->displayVideos("WHERE `category` = '$id' ORDER BY RAND() , id DESC LIMIT $start,$per_page");
                     if (!empty($videos)):
                         foreach ($videos as $value):
                 ?>
@@ -51,10 +58,17 @@ $id = $category->checkCategoryLink($_GET['cat']);
 
                 <nav class="text-center">
                     <ul class="pagination">
-                        <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
+                        <?php
+                        $allVideos  = $video->countVideos("WHERE `category` = '$id'");
+                        $total_pages = ceil($allVideos / $per_page);
+                        $cat = $category->displayCategory("WHERE id = '$id'");
+                        foreach ($cat as $row){
+                            $row;
+                        }
+                        for ($i = 1;$i <= $total_pages;$i++){
+                            echo '<li '.($page == $i ? 'class="active"' : '').'><a href="category.php?cat='.$row['cat_unique'].'&page='.$i.'">'.$i.'</span></a></li>';
+                        }
+                        ?>
                     </ul>
                 </nav>
             </article>

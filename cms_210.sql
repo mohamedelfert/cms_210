@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: May 18, 2021 at 09:25 AM
+-- Generation Time: May 18, 2021 at 11:15 AM
 -- Server version: 5.7.31
 -- PHP Version: 7.3.21
 
@@ -59,7 +59,24 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `comment` text NOT NULL,
   `commDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4;
+) ENGINE=MyISAM AUTO_INCREMENT=51 DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `comments`
+--
+
+INSERT INTO `comments` (`id`, `user_id`, `video_id`, `comment`, `commDate`) VALUES
+(40, 1, 17, 'jugdr 1\r\n', '2021-05-18 10:19:14'),
+(41, 1, 17, 'تعليق 1', '2021-05-18 10:19:20'),
+(42, 1, 16, 'تعليق جديد', '2021-05-18 10:19:29'),
+(43, 1, 20, 'حلة', '2021-05-18 10:19:42'),
+(44, 1, 20, 'جميل', '2021-05-18 10:19:47'),
+(45, 1, 21, 'جيد', '2021-05-18 10:19:54'),
+(46, 1, 19, 'شسياايش', '2021-05-18 10:20:30'),
+(47, 1, 18, 'يشستيشس', '2021-05-18 10:20:36'),
+(48, 1, 15, 'يشس', '2021-05-18 10:20:47'),
+(49, 1, 14, 'يشسيشس', '2021-05-18 10:20:53'),
+(50, 1, 14, 'يشسيشسي', '2021-05-18 10:20:56');
 
 -- --------------------------------------------------------
 
@@ -135,14 +152,14 @@ CREATE TABLE IF NOT EXISTS `videos` (
 --
 
 INSERT INTO `videos` (`id`, `title`, `link`, `image`, `description`, `category`, `videoLink`, `views`) VALUES
-(14, 'كيفية بناء متجر إلكتروني على الووردبريس - متجر ووكومرس', 'https://www.youtube.com/watch?v=S20doQPCLns', 'image60987c7533a42.png', 'يستعرض الفيديو كيفية بناء متجر إلكتروني على الووردبريس - متجر ووكومرس، وتعتبر هذه الخطوة رئيسية لكثير ممن يرغبون بالدخول لمجال التجارة الإلكترونية، حيث يستطيع التاجر بعد الإنتهاء من متابعته للفيديو من بناء متجر إلكتروني متكامل قادر على اتمام عمليات بيع للعملاء بالمناطق التي يرغب بها ، يشرح الفيديو بالتفصيل كيفية إنشاء متجر إلكتروني في ووردبريس وكيفية تصميم متجر الكتروني خطوة بخطوة مع الكثير من النصائح الخاصة بالسيو وتسريع الموقع لضمان الحصول من المبيعات.', 2, '1m52u8t0nhit', 92),
-(15, 'Simple Shopping Cart using PHP & MySql-2019', 'https://www.youtube.com/watch?v=6OAnZzCJFCk', 'image609908c985b68.png', 'shopping cart using PHP with Mysql. In this video tutorial, I have show you how to display product on a web page, how to add an item to shopping cart and how to remove an item from shopping cart by using PHP programming language with Mysql database.', 2, '45yhul0b5yh5', 17),
-(16, 'النفخة الكدابة - علي كاكولي', 'https://www.youtube.com/watch?v=PhX4nWfUpWo', 'image609912030615b.jpg', 'كلمات الأغنية:\r\nطب كنت فين يا لأ لما لما أنا قلت آه \r\nوكنت فين يا عقلي لما لما مشيت وراه \r\nبعد لما فقت لقيت الموت بجد أرحم، من إني أعيش لو ثانية وحدة كمان معاه. \r\nهيقول ارجع لو عشان سبتو مش ناقصة كآبة \r\nفي ناس تمسك فيك لما تكون هيا المتسابة \r\nنافخ نفسه وعلى ايه وعليه \r\nليه نافش ريشو\r\nهبعد عنو عنو ما بق من النفخة الكدابة \r\nمع مرور الوقت عرفت عرفت اني نجيت \r\nأول ما خدت بعضي أنا وبعيد بعيد مشيت \r\nده  أنا أكبر مقلب خدتو كان في حياتي هو\r\nده كان كابوس والحمد لله إني خلاص صحيت', 3, '734buf8iigz', 120),
-(17, 'إزاي عملت مكتب كمبيوتر للشغل والجيمينج', 'https://www.youtube.com/watch?v=tuFnILixhNk', 'image609912557a9e0.jpg', 'كفريلانسر بقضي وقت كتير جدًا على الكمبيوتر، في الفيديو دا هوريكم ازاي عملت المكتب دا بأماكن تخزين كتيرة بحيث يكون المكتب فاضي ومعليهوش كراكيب كتير\r\n', 3, '3tglqpdptsgl', 21),
-(18, 'Full-Time Scenes As Manchester City Defeat PSG To Reach First Champions League Final!', 'https://www.youtube.com/watch?v=OE5JU0bUaIk', 'image609913040a87c.jpg', 'Manchester City defeat PSG 4-1 on aggregate to reach the Champions League final for the very first time.\r\n', 1, 'bymridkni10', 6),
-(19, 'All Sports Trick Shots | Dude Perfect', 'https://www.youtube.com/watch?v=bIDKhZ_4jLQ', 'image6099134849555.jpg', 'Trick shots from all your favorite sports!\r\n', 1, '2aay6a4m6tzc', 10),
-(20, 'عملت حاجات مجنونة بالطابعة ثلاثية الأبعاد | 3D Printer !', 'https://www.youtube.com/watch?v=zJ4NVSvQi2o', 'image609a6520031b2.jpg', 'عملت حاجات مجنونة بالطابعة ثلاثية الأبعاد | 3D Printer !\r\n', 3, '3spguaion4w', 27),
-(21, 'ازاى تجمع جهازك', 'https://www.youtube.com/watch?v=DvVMojkL6JQ', 'image609a662589f55.png', 'ازاى تجمع جهازك مع عمر عبد الرحيم ؟ بدون حرق', 3, '4aw93qpskkrp', 17);
+(14, 'كيفية بناء متجر إلكتروني على الووردبريس - متجر ووكومرس', 'https://www.youtube.com/watch?v=S20doQPCLns', 'image60987c7533a42.png', 'يستعرض الفيديو كيفية بناء متجر إلكتروني على الووردبريس - متجر ووكومرس، وتعتبر هذه الخطوة رئيسية لكثير ممن يرغبون بالدخول لمجال التجارة الإلكترونية، حيث يستطيع التاجر بعد الإنتهاء من متابعته للفيديو من بناء متجر إلكتروني متكامل قادر على اتمام عمليات بيع للعملاء بالمناطق التي يرغب بها ، يشرح الفيديو بالتفصيل كيفية إنشاء متجر إلكتروني في ووردبريس وكيفية تصميم متجر الكتروني خطوة بخطوة مع الكثير من النصائح الخاصة بالسيو وتسريع الموقع لضمان الحصول من المبيعات.', 2, '1m52u8t0nhit', 98),
+(15, 'Simple Shopping Cart using PHP & MySql-2019', 'https://www.youtube.com/watch?v=6OAnZzCJFCk', 'image609908c985b68.png', 'shopping cart using PHP with Mysql. In this video tutorial, I have show you how to display product on a web page, how to add an item to shopping cart and how to remove an item from shopping cart by using PHP programming language with Mysql database.', 2, '45yhul0b5yh5', 20),
+(16, 'النفخة الكدابة - علي كاكولي', 'https://www.youtube.com/watch?v=PhX4nWfUpWo', 'image609912030615b.jpg', 'كلمات الأغنية:\r\nطب كنت فين يا لأ لما لما أنا قلت آه \r\nوكنت فين يا عقلي لما لما مشيت وراه \r\nبعد لما فقت لقيت الموت بجد أرحم، من إني أعيش لو ثانية وحدة كمان معاه. \r\nهيقول ارجع لو عشان سبتو مش ناقصة كآبة \r\nفي ناس تمسك فيك لما تكون هيا المتسابة \r\nنافخ نفسه وعلى ايه وعليه \r\nليه نافش ريشو\r\nهبعد عنو عنو ما بق من النفخة الكدابة \r\nمع مرور الوقت عرفت عرفت اني نجيت \r\nأول ما خدت بعضي أنا وبعيد بعيد مشيت \r\nده  أنا أكبر مقلب خدتو كان في حياتي هو\r\nده كان كابوس والحمد لله إني خلاص صحيت', 3, '734buf8iigz', 124),
+(17, 'إزاي عملت مكتب كمبيوتر للشغل والجيمينج', 'https://www.youtube.com/watch?v=tuFnILixhNk', 'image609912557a9e0.jpg', 'كفريلانسر بقضي وقت كتير جدًا على الكمبيوتر، في الفيديو دا هوريكم ازاي عملت المكتب دا بأماكن تخزين كتيرة بحيث يكون المكتب فاضي ومعليهوش كراكيب كتير\r\n', 3, '3tglqpdptsgl', 28),
+(18, 'Full-Time Scenes As Manchester City Defeat PSG To Reach First Champions League Final!', 'https://www.youtube.com/watch?v=OE5JU0bUaIk', 'image609913040a87c.jpg', 'Manchester City defeat PSG 4-1 on aggregate to reach the Champions League final for the very first time.\r\n', 1, 'bymridkni10', 9),
+(19, 'All Sports Trick Shots | Dude Perfect', 'https://www.youtube.com/watch?v=bIDKhZ_4jLQ', 'image6099134849555.jpg', 'Trick shots from all your favorite sports!\r\n', 1, '2aay6a4m6tzc', 13),
+(20, 'عملت حاجات مجنونة بالطابعة ثلاثية الأبعاد | 3D Printer !', 'https://www.youtube.com/watch?v=zJ4NVSvQi2o', 'image609a6520031b2.jpg', 'عملت حاجات مجنونة بالطابعة ثلاثية الأبعاد | 3D Printer !\r\n', 3, '3spguaion4w', 32),
+(21, 'ازاى تجمع جهازك', 'https://www.youtube.com/watch?v=DvVMojkL6JQ', 'image609a662589f55.png', 'ازاى تجمع جهازك مع عمر عبد الرحيم ؟ بدون حرق', 3, '4aw93qpskkrp', 20);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

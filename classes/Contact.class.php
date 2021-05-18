@@ -39,8 +39,8 @@ class Contact extends MysqliConnect{
         }
     }
 
-    public function getMessages(){
-        $this->query('*', "messages", "ORDER BY id DESC LIMIT 10");
+    public function getMessages($other = null){
+        $this->query('*', "messages", $other);
         $this->execute();
         if ($this->rowCount() > 0){
             while ($messages = $this->fetch()){
@@ -48,6 +48,14 @@ class Contact extends MysqliConnect{
             }
             return $messageInfo;
         }
+    }
+
+    public function getCountMessages(){
+        $this->query('*', "messages");
+        if ($this->execute()){
+            return $this->rowCount();
+        }
+        return 0;
     }
 
     public function getMessageById($id){

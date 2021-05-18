@@ -13,7 +13,7 @@
                     <?php
                     if($_SERVER['REQUEST_METHOD'] == "GET" and isset($_GET['id'])){
                         $id = (int)$_GET['id'];
-                        $video = $video->displayVideoInfo("WHERE `id` = '{$id}'");
+                        $video = $video->displayVideos("WHERE `id` = '{$id}'");
                     }
 
                     if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['edit'])){

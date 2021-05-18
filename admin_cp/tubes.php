@@ -36,6 +36,14 @@
                                     <tbody>
                                     <?php
                                     $id = 1;
+                                    $per_page = 5;
+                                    if (!isset($_GET['page'])){
+                                        $page = 1;
+                                    }else{
+                                        $page = intval($_GET['page']);
+                                    }
+                                    $start = ($page - 1) * $per_page;
+                                    $tubes  = $video->displayVideos("ORDER BY id DESC LIMIT $start,$per_page");
                                     if (!empty($tubes)):
                                         foreach ($tubes as $tube):
                                     ?>
@@ -66,10 +74,13 @@
 
                         <nav class="text-center">
                             <ul class="pagination">
-                                <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
+                                <?php
+                                $allVideos  = $video->countVideos();
+                                $total_pages = ceil($allVideos / $per_page);
+                                for ($i = 1;$i <= $total_pages;$i++){
+                                    echo '<li '.($page == $i ? 'class="active"' : '').'><a href="tubes.php?page='.$i.'">'.$i.'</span></a></li>';
+                                }
+                                ?>
                             </ul>
                         </nav>
                     </div>

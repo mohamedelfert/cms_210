@@ -35,6 +35,14 @@
                                     <tbody>
                                     <?php
                                     $i = 1;
+                                    $per_page = 1;
+                                    if (!isset($_GET['page'])){
+                                        $page = 1;
+                                    }else{
+                                        $page = intval($_GET['page']);
+                                    }
+                                    $start = ($page - 1) * $per_page;
+                                    $messages = $contact->getMessages("ORDER By id DESC LIMIT $start,$per_page");
                                     if (!empty($messages)):
                                         foreach ($messages as $value):
                                     ?>
@@ -63,10 +71,13 @@
 
                         <nav class="text-center">
                             <ul class="pagination">
-                                <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
+                                <?php
+                                $allMessages = $contact->getCountMessages();
+                                $total_pages = ceil($allMessages / $per_page);
+                                for ($i = 1;$i <= $total_pages;$i++){
+                                    echo '<li '.($page == $i ? 'class="active"' : '').'><a href="inbox.php?page='.$i.'">'.$i.'</a></li>';
+                                }
+                                ?>
                             </ul>
                         </nav>
                     </div>

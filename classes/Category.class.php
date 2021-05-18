@@ -72,8 +72,8 @@ class Category extends MysqliConnect {
         }
     }
 
-    public function displayCategory(){
-        $this->query('*', "category", "ORDER BY id DESC");
+    public function displayCategory($other = null){
+        $this->query('*', "category", $other);
         $this->execute();
         if ($this->rowCount() > 0){
             while ($row = $this->fetch()){

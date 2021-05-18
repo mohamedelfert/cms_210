@@ -13,8 +13,8 @@
   <div class="row">
       <article class="col-xs-12 col-md-12" style="min-height: 290px">
           <?php
-          if ($video->displayVideoInfo() > 0):
-              $videos = $video->displayVideoInfo('ORDER BY RAND() , id DESC LIMIT 9');
+          if ($video->displayVideos() > 0):
+              $videos = $video->displayVideos('ORDER BY RAND() , id DESC LIMIT 9');
               if (!empty($videos)):
                   foreach ($videos as $value):
           ?>

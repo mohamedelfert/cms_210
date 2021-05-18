@@ -119,27 +119,14 @@ class Videos extends MysqliConnect{
         }
     }
 
-    public function displayVideos(){
-        $this->query('*', 'videos', "ORDER BY id DESC LIMIT 10");
+    public function displayVideos($other = null){
+        $this->query('*', 'videos',$other);
         $this->execute();
         if ($this->rowCount() > 0){
             while ($rows = $this->fetch()){
                 $rowVideos[] = $rows;
             }
             return $rowVideos;
-        }
-    }
-
-    public function displayVideoInfo($other = null){
-        $this->query('*', "videos",$other);
-        $this->execute();
-        if ($this->rowCount() > 0){
-            while ($rows = $this->fetch()){
-                $rowVideos[] = $rows;
-            }
-            return $rowVideos;
-        }else{
-            return null;
         }
     }
 
@@ -205,8 +192,8 @@ class Videos extends MysqliConnect{
         }
     }
 
-    public function getAllVideoComments(){
-        $this->query('*', 'comments', "ORDER BY id DESC");
+    public function getAllVideoComments($otehr = null){
+        $this->query('*', 'comments', $otehr);
         if ($this->execute() and $this->rowCount() > 0){
             while ($comments = $this->fetch()){
                 $comment[] = $comments;
@@ -289,8 +276,8 @@ class Videos extends MysqliConnect{
         }
     }
 
-    public function countVideos(){
-        $this->query('id', "Videos");
+    public function countVideos($other = null){
+        $this->query('id', "Videos", $other);
         if ($this->execute() and $this->rowCount() > 0){
             return $this->rowCount();
         }else{

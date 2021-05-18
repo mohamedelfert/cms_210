@@ -1,6 +1,6 @@
 <?php require_once 'inc/topHeader.php';
 $id = $video->checkVideoUrl($_GET['v']);
-$videos = $video->displayVideoInfo("WHERE id = '$id'");
+$videos = $video->displayVideos("WHERE id = '$id'");
 /*عملت foreach عشان لما اعرض تكون مصفوفه واحده وليس مصفوفه بداخلها مصفوفه*/
 /*تحت بالعرض انا مش مستخدم ال foreach ومستخدم الاستدعاء عن طريق كتابه المتغير بعده العنصر الاول بالمصفوفه الاولي ثم العنصر التالي يكون الشئ المطلوب وهو بالمصفوفه الداخليه*/
 foreach ($videos as $videoId){

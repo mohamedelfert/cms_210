@@ -160,7 +160,7 @@
                                     <tbody>
                                     <?php
                                     $i = 1;
-                                    $comments = $video->getAllVideoComments();
+                                    $comments = $video->getAllVideoComments("ORDER By id DESC LIMIT 10");
                                     if (!empty($comments)):
                                         foreach ($comments as $value):
                                             ?>

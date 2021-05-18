@@ -8,8 +8,8 @@ if(isset($_SESSION['is_logged']) and $_SESSION['is_logged'] == TRUE and $_SESSIO
     header("Location: ../index.php");
 }
 
-$cat = $category->displayCategory();
+$cat = $category->displayCategory("ORDER BY id DESC");
 
-$tubes  = $video->displayVideos();
+$tubes  = $video->displayVideos("ORDER BY id DESC LIMIT 10");
 
-$messages  = $contact->getMessages();
+$messages  = $contact->getMessages("ORDER BY id DESC LIMIT 10");
