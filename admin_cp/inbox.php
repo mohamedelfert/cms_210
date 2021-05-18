@@ -42,7 +42,7 @@
                                             <td><?php echo $i++;?></td>
                                             <td><?php echo $value['username'];?></td>
                                             <td><?php echo $value['email'];?></td>
-                                            <td><?php echo $value['message'];?></td>
+                                            <td><?php echo (mb_strlen($value['message'], "utf8") > 40 ? mb_substr($value['message'],0,40) . ' ...' : $value['message']);?></td>
                                             <td><a href="read.php?id=<?php echo $value['id'];?>" class="btn btn-sm btn-info">مشاهده</a></td>
                                             <td><a href="inbox.php?delete=<?php echo $value['id'];?>" class="btn btn-sm btn-danger">حذف</a></td>
                                         </tr>

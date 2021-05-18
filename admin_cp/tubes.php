@@ -45,7 +45,7 @@
                                             <td><?php echo substr($tube['title'],0,120); ?> ...</td>
                                             <td><?php echo $category->getCatNameById($tube['category']); ?></td>
                                             <td>1</td>
-                                            <td><a href="../video.php?v=<?php echo $tube['videoLink']; ?>" class="btn btn-sm btn-info">مشاهده</a></td>
+                                            <td><a href="../video.php?v=<?php echo $tube['videoLink']; ?>" target="_blank" class="btn btn-sm btn-info">مشاهده</a></td>
                                             <td><a href="editvideo.php?id=<?php echo $tube['id']; ?>" class="btn btn-sm btn-warning">تعديل</a></td>
                                             <td><a href="tubes.php?delete=<?php echo $tube['id']; ?>" class="btn btn-sm btn-danger">حذف</a></td>
                                         </tr>

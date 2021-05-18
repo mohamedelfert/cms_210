@@ -53,23 +53,27 @@ class Contact extends MysqliConnect{
     public function getMessageById($id){
         $id = (int)$this->esc($id);
         $this->query('*', "messages", "WHERE id = '{$id}'");
-        $this->execute();
-        if ($this->rowCount() > 0){
-            while ($messages = $this->fetch()){
-                $messageInfo[] = $messages;
-            }
-            return $messageInfo;
+        if ($this->execute() and $this->rowCount() > 0){
+            $messages = $this->fetch();
+            return $messages;
+        }else{
+            header("Location: inbox.php");
         }
     }
 
     public function deleteMessages($id){
         $id = (int)$this->esc($id);
-        $this->delete('messages', 'id',$id);
-        if ($this->execute()){
-            echo Messages::setMessage('success','رائع','تم حذف الرساله بنجاح') . Messages::getMessage();
-            echo '<meta http-equiv="refresh" content="2; \'inbox.php\'">';
+        $this->query('*', "messages", "WHERE id = '{$id}'");
+        if ($this->execute() and $this->rowCount() > 0){
+            $this->delete('messages', 'id',$id);
+            if ($this->execute()){
+                echo Messages::setMessage('success','رائع','تم حذف الرساله بنجاح') . Messages::getMessage();
+                echo '<meta http-equiv="refresh" content="2; \'inbox.php\'">';
+            }else{
+                echo Messages::setMessage('danger','خطأ','غير متوقع الرجاء المحاوله مره اخري') . Messages::getMessage();
+            }
         }else{
-            echo Messages::setMessage('danger','خطأ','غير متوقع الرجاء المحاوله مره اخري') . Messages::getMessage();
+            header("Location: inbox.php");
         }
     }
 }

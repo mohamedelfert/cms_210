@@ -205,6 +205,28 @@ class Videos extends MysqliConnect{
         }
     }
 
+    public function getAllVideoComments(){
+        $this->query('*', 'comments', "ORDER BY id DESC");
+        if ($this->execute() and $this->rowCount() > 0){
+            while ($comments = $this->fetch()){
+                $comment[] = $comments;
+            }
+            return $comment;
+        }else{
+            return null;
+        }
+    }
+
+    public function getVideoById($id){
+        $id = (int)$id;
+        $this->query("`videoLink`", 'videos', "WHERE id = '$id'");
+        if ($this->execute() and $this->rowCount() > 0){
+            $videoLink = $this->fetch();
+            return $videoLink['videoLink'];
+        }
+        return null;
+    }
+
     public function getUserNameById($id){
         $id = (int)$id;
         $this->query("`first_name`,`last_name`", 'users', "WHERE id = '$id'");
@@ -255,6 +277,22 @@ class Videos extends MysqliConnect{
             return $this->rowCount();
         }else{
             return 0;
+        }
+    }
+
+    public function deleteAnyComment($id){
+        $id = (int)$this->esc($id);
+        $this->query('*', "comments", "WHERE id = '{$id}'");
+        if ($this->execute() and $this->rowCount() > 0){
+            $this->delete('comments', 'id',$id);
+            if ($this->execute()){
+                echo Messages::setMessage('success','رائع','تم حذف التعليق بنجاح') . Messages::getMessage();
+                echo '<meta http-equiv="refresh" content="2; \'comments.php\'">';
+            }else{
+                echo Messages::setMessage('danger','خطأ','غير متوقع الرجاء المحاوله مره اخري') . Messages::getMessage();
+            }
+        }else{
+            header("Location: comments.php");
         }
     }
 }
