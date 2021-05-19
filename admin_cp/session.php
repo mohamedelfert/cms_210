@@ -13,3 +13,8 @@ $cat = $category->displayCategory("ORDER BY id DESC");
 $tubes  = $video->displayVideos("ORDER BY id DESC LIMIT 10");
 
 $messages  = $contact->getMessages("ORDER BY id DESC LIMIT 10");
+
+/*
+ * for pagination
+ */
+//$start = ($page - 1) * ADMINPERPAGE;

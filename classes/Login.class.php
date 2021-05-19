@@ -61,7 +61,7 @@ class Login extends MysqliConnect{
             if ($this->makeUserLogged()){
                 Messages::setMessage('success','رائع','تم تسجيل الدخول بنجاح , جاري تحويلك للصفحه الرئيسيه');
                 echo Messages::getMessage();
-                echo '<meta http-equiv="refresh" content="3; \'index.php\'">';
+                echo '<meta http-equiv="refresh" content="2; \'index.php\'">';
             }else{
                 Messages::setMessage('danger','خطأ','البيانات المدخله غير صحيحه 2');
                 echo Messages::getMessage();

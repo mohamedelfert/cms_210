@@ -14,8 +14,22 @@ if (isset($_GET['logout']) and $_GET['logout'] == true){
     header("Location: index.php");
 }
 
+/*
+ * for pagination
+ */
+//if (!isset($page)){
+//    $page = 1;
+//}else{
+//    $page = intval($_GET['page']);
+//}
+
+
 $category = new Category();
 
 $video = new Videos();
 
 $contact = new Contact();
+
+//$pagination = new Pagination();
+
+$users = new Users();

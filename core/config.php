@@ -11,3 +11,9 @@ const DB_NAME = 'cms_210';
  * Other Constant
  */
 const SITENAME = 'تيوباتي';
+
+/*
+ * for pagination
+ */
+//const ADMINPERPAGE = 1;
+//const PERPAGE = 9;

@@ -46,7 +46,7 @@ class Register extends MysqliConnect {
             if ($this->insertNewUser()){
                 Messages::setMessage('success','رائع','تم التسجيل بنجاح , جاري تحويلك للصفحه الرئيسيه');
                 echo Messages::getMessage();
-                echo '<meta http-equiv="refresh" content="3; \'index.php\'">';
+                echo '<meta http-equiv="refresh" content="2; \'index.php\'">';
             }else{
                 Messages::setMessage('danger','خطأ','عفوا حصل خطأ اثناء التسجيل برجاء المحاوله مره اخري');
                 echo Messages::getMessage();
