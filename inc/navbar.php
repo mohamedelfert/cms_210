@@ -27,9 +27,9 @@
           </ul>
         </li>
       </ul>
-      <form class="navbar-form navbar-right">
+      <form action="search.php" method="GET" class="navbar-form navbar-right">
         <div class="form-group">
-          <input type="text" class="form-control" placeholder="ادخل اسم الفلم">
+          <input type="text" name="search" id="search" class="form-control" placeholder="ادخل اسم الفلم">
         </div>
         <button type="submit" class="btn btn-default">بحث</button>
       </form>

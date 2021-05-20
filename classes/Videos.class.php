@@ -75,8 +75,9 @@ class Videos extends MysqliConnect{
 
     private function addNewVideo(){
         $videoLink = base_convert(microtime(false),10,36);
-        $this->insert("videos", "`title`, `link`, `image`, `description`, `category`, `videoLink`" ,
-                                      "'$this->title','$this->link','$this->image','$this->description','$this->category','$videoLink'");
+        $user_id = $_SESSION['user']['id'];
+        $this->insert("videos", "`user_id`, `title`, `link`, `image`, `description`, `category`, `videoLink`" ,
+                                      "'$user_id','$this->title','$this->link','$this->image','$this->description','$this->category','$videoLink'");
         if ($this->execute()){
             Messages::setMessage('success','رائع','تم رفع الفيديو بنجاح');
             echo Messages::getMessage();
@@ -104,8 +105,14 @@ class Videos extends MysqliConnect{
     }
 
     public function deleteVideo($id){
-        $this->query('id', 'videos', "WHERE id = '{$id}'");
+        $this->query('id, image', 'videos', "WHERE id = '{$id}'");
         if ($this->execute() and $this->rowCount() > 0){
+            /** this for delete image from path when video deleted **/
+            $image = $this->fetch();
+            $image_path = __DIR__ . '/../libs/upload/' . $image['image'];
+            if (file_exists($image_path)){
+                unlink($image_path);
+            }
             $this->delete('videos', 'id', $id);
             if ($this->execute()){
                 $this->delete("comments",'video_id',$id);

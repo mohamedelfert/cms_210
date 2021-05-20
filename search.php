@@ -1,7 +1,7 @@
 <?php require_once 'inc/topHeader.php';
-$id = $category->checkCategoryLink($_GET['cat']);
+$search = $_GET['search'];
 ?>
-    <title><?php echo $category->getCatNameByLink($_GET['cat']) . ' - ' . SITENAME; ?></title>
+    <title><?php echo $search . ' - ' . SITENAME; ?></title>
 <?php require_once 'inc/header.php'; ?>
     <!-- NAVBAR START -->
 <?php require_once 'inc/navbar.php'; ?>
@@ -13,7 +13,7 @@ $id = $category->checkCategoryLink($_GET['cat']);
 
     <main class="container">
         <div class="row">
-            <article class="col-xs-12 col-md-12" style="min-height: 240px">
+            <article class="col-xs-12 col-md-12" style="min-height: 290px">
                 <?php
                 $per_page = 9;
                 if (!isset($_GET['page'])){
@@ -22,10 +22,10 @@ $id = $category->checkCategoryLink($_GET['cat']);
                     $page = intval($_GET['page']);
                 }
                 $start = ($page - 1) * $per_page;
-                $videos = $video->displayVideos("WHERE `category` = '$id' ORDER BY RAND() , id DESC LIMIT $start,$per_page");
+                $videos = $video->displayVideos("WHERE `title` LIKE '%$search%' ORDER BY RAND() , id DESC LIMIT $start,$per_page");
                 if (!empty($videos)):
                     foreach ($videos as $value):
-                ?>
+                        ?>
                         <div class="col-md-4" style="position: relative;">
                             <div style="position: absolute;left: 65px;top: 10px;color: #3a3636;font-size: 12px;" data-toggle="tooltip" data-placement="top" title="المشاهدات">
                                 <i class="glyphicon glyphicon-eye-open" style="color: #c7c7c7;" ></i> <?php echo $video->getCountViews($value['id']);?>
@@ -41,12 +41,12 @@ $id = $category->checkCategoryLink($_GET['cat']);
                                 <div class="text-center"><a href="video.php?v=<?php echo $value['videoLink']; ?>" class="btn btn-danger">شاهد الآن</a></div>
                             </div>
                         </div>
-                <?php
+                    <?php
                     endforeach;
                 else:
-                ?>
-                    <div class="alert alert-danger alert-dismissible text-center" role="alert">
-                        <strong>تنبيه !</strong> لا يوجد اي فيديوهات بالقسم حاليا
+                    ?>
+                    <div class="alert alert-info alert-dismissible text-center" role="alert">
+                        <strong>تنبيه !</strong> لا يوجد ما يوافق بحثك حاول بعنوان اخر
                     </div>
                 <?php
                 endif;
@@ -57,14 +57,10 @@ $id = $category->checkCategoryLink($_GET['cat']);
                 <nav class="text-center">
                     <ul class="pagination">
                         <?php
-                        $allVideos  = $video->countVideos("WHERE `category` = '$id'");
+                        $allVideos  = $video->countVideos("WHERE `title` LIKE '%$search%'");
                         @$total_pages = ceil($allVideos / @$per_page);
-                        $cat = $category->displayCategory("WHERE id = '$id'");
-                        foreach ($cat as $row){
-                            $row;
-                        }
                         for ($i = 1;$i <= $total_pages;$i++){
-                            echo '<li '.($page == $i ? 'class="active"' : '').'><a href="category.php?cat='.$row['cat_unique'].'&page='.$i.'">'.$i.'</span></a></li>';
+                            echo '<li '.($page == $i ? 'class="active"' : '').'><a href="search.php?search='.$_GET['search'].'&page='.$i.'">'.$i.'</span></a></li>';
                         }
                         ?>
                     </ul>
