@@ -34,7 +34,7 @@
                             </div>
                             <div class="panel-footer">
                                 <a href="../index.php?logout=true" class="btn btn-danger btn-sm pull-right">تسجيل الخروج</a>
-                                <a href="edit-user.php?id=<?php echo '1';?>" class="btn btn-warning btn-sm pull-left">تعديل البيانات</a>
+                                <a href="edit_user.php?id=<?php echo $_SESSION['user']['id'];?>" class="btn btn-warning btn-sm pull-left">تعديل البيانات</a>
                                 <div class="clearfix"></div>
                             </div>
                         </div>
@@ -45,7 +45,7 @@
                                 <div class="panel-heading">الاعضاء المسجلين</div>
                                 <div class="panel-body">
                                     <h1 style="color: #7285b1"><i class="glyphicon glyphicon-user pull-right"></i></h1>
-                                    <p class="pull-left" style="font-size: 25px">5</p>
+                                    <p class="pull-left" style="font-size: 25px"><?php echo $users->countUsers();?></p>
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="panel-footer">

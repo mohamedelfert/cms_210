@@ -108,8 +108,11 @@ class Videos extends MysqliConnect{
         if ($this->execute() and $this->rowCount() > 0){
             $this->delete('videos', 'id', $id);
             if ($this->execute()){
-                echo Messages::setMessage('success','رائع','تم الحذف بنجاح') . Messages::getMessage();
-                echo '<meta http-equiv="refresh" content="2; \'tubes.php\'">';
+                $this->delete("comments",'video_id',$id);
+                if ($this->execute()){
+                    echo Messages::setMessage('success','رائع','تم الحذف بنجاح') . Messages::getMessage();
+                    echo '<meta http-equiv="refresh" content="2; \'tubes.php\'">';
+                }
             }else{
                 echo Messages::setMessage('danger','خطأ','عفوا خطأ غير متوقع من النظام') . Messages::getMessage();
                 echo '<meta http-equiv="refresh" content="2; \'tubes.php\'">';

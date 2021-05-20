@@ -8,6 +8,6 @@
         <li><a href="users.php"><i class="glyphicon glyphicon-user"></i> الاعضاء</a></li>
         <li><a href="category.php"><i class="glyphicon glyphicon-list"></i> اقسام الموقع</a></li>
         <li><a href="comments.php"><i class="glyphicon glyphicon-comment"></i> التعليقات</a></li>
-        <li><a href="#"><i class="glyphicon glyphicon-eye-open"></i> الملف الشخصي</a></li>
+        <li><a href="profile.php"><i class="glyphicon glyphicon-eye-open"></i> الملف الشخصي</a></li>
     </ul>
 </div>

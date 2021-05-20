@@ -18,7 +18,7 @@ $user = $users->checkUserProfile($id);
                 <div class="col-md-7 col-md-offset-3" style="padding: 0px">
                     <?php
                     if ($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['edit'])){
-                        $users->setInput($_POST['first_name'],$_POST['last_name'],$_POST['email'],$_POST['password'],$_POST['con_password']);
+                        $users->setInput($_POST['first_name'],$_POST['last_name'],$_POST['email'],$_POST['password'],$_POST['con_password'],null,$_SESSION['user']['isAdmin']);
                         $users->displayErrors();
                     }
                     ?>
