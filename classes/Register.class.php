@@ -68,8 +68,11 @@ class Register extends MysqliConnect {
         $this->insert('users',"first_name , last_name , email , password",
                       "'$this->first_name','$this->last_name','$this->email','$password'");
         if ($this->execute()){
+            $this->query('*', "users", "WHERE `email` = '$this->email'");
+            $userId = $this->fetch();
             $_SESSION['is_logged'] = true;
             $_SESSION['user']      = [
+                                        'id'      => $userId['id'],
                                         'fname'   => $this->first_name,
                                         'lname'   => $this->last_name,
                                         'email'   => $this->email,

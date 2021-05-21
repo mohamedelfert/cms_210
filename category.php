@@ -58,7 +58,7 @@ $id = $category->checkCategoryLink($_GET['cat']);
                     <ul class="pagination">
                         <?php
                         $allVideos  = $video->countVideos("WHERE `category` = '$id'");
-                        @$total_pages = ceil($allVideos / @$per_page);
+                        $total_pages = ceil($allVideos / $per_page);
                         $cat = $category->displayCategory("WHERE id = '$id'");
                         foreach ($cat as $row){
                             $row;
